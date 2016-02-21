@@ -4,22 +4,32 @@ import java.util.Random;
 
 public class Solution {
    public ListNode mergeKLists(ListNode[] lists) {
-       ListNode test = merge(lists, 0, 1);
-       StdOut.println("Test merge");
-//       while(lists.length != 1) {
-//           ListNode[] temp = new ListNode[lists.length / 2];
-//           for(int i = 0; i * 2 < lists.length; i++) {
-////               StdOut.println("I * 2: " + i * 2 + " next: " + (i * 2 + 1));  
-//               temp[i] = merge(lists, i * 2, i * 2 + 1);
-//           }
-//           lists = temp;
-//       }    
-       return test;
+       while(lists.length != 1) {
+           ListNode[] temp;
+           
+           if((lists.length % 2) == 0) 
+               temp = new ListNode[lists.length / 2];
+           else 
+               temp = new ListNode[lists.length / 2 + 1];
+           
+           for(int i = 0; i * 2 < lists.length; i++) {
+//               StdOut.println("I * 2: " + i * 2 + " next: " + (i * 2 + 1));  
+               temp[i] = merge(lists, i * 2, i * 2 + 1);
+           }
+           lists = temp;
+       }    
+       return lists[0];
    }
    
    private static ListNode merge(ListNode[] lists, int start, int end) {
        ListNode listart = lists[start];
-       ListNode liend = lists[end];
+       ListNode liend;
+
+       if(end == lists.length) {
+           return listart;
+       } else {
+           liend = lists[end];      
+       }
        
        if(listart.val < liend.val) { 
            // listart should be the larger one
@@ -29,18 +39,7 @@ public class Solution {
        }
        ListNode root = listart;
        
-       int i = 0;
-       while(liend != null) {
-           i++;
-           StdOut.printf("ROOT Step %dth: \n", i);
-           printlist(root);
-           
-           StdOut.printf("listart Step %dth: \n", i);
-           printlist(listart);
-           
-           StdOut.printf("liend Step %dth: \n", i);
-           printlist(liend);
-           
+       while(liend != null) {           
            if(listart.next == null) {
                listart.next = liend;
                return root;
@@ -91,26 +90,28 @@ public class Solution {
        Solution sol = new Solution();
        Random test = new Random();
 
-       ListNode[] testlist = new ListNode[5];
-       for(int i = 0; i < 5; i++) {
+       ListNode[] testlist = new ListNode[6];
+       for(int i = 0; i < 6; i++) {
            testlist[i] = randomeNode(test.nextInt(4) + 1, test.nextInt(100) + 1);
        }
-       ListNode iter = testlist[0];
-       while(iter != null) {
-           StdOut.printf("val %d \n", iter.val);
-           iter = iter.next;
-       }
-       StdOut.println("List 1");
-       iter = testlist[1];
-       while(iter != null) {
-           StdOut.printf("val %d \n", iter.val);
-           iter = iter.next;
-       }
-       iter = sol.mergeKLists(testlist);
-       StdOut.println("linked");
-       while(iter != null) {
-           StdOut.printf("val %d \n", iter.val);
-           iter = iter.next;
-       }
+       ListNode tk = sol.mergeKLists(testlist);
+       printlist(tk);
+//       ListNode iter = testlist[0];
+//       while(iter != null) {
+//           StdOut.printf("val %d \n", iter.val);
+//           iter = iter.next;
+//       }
+//       StdOut.println("List 1");
+//       iter = testlist[1];
+//       while(iter != null) {
+//           StdOut.printf("val %d \n", iter.val);
+//           iter = iter.next;
+//       }
+//       iter = sol.mergeKLists(testlist);
+//       StdOut.println("linked");
+//       while(iter != null) {
+//           StdOut.printf("val %d \n", iter.val);
+//           iter = iter.next;
+//       }
    }
 }
