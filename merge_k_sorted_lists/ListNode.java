@@ -4,7 +4,7 @@ package merge_k_sorted_lists;
      int val;
      ListNode next;
      
-//     ListNode(int x) {
-//         val = x; 
-//     }
+     ListNode(int x) {
+         val = x; 
+     }
 }
