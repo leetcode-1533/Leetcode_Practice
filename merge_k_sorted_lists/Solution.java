@@ -90,28 +90,14 @@ public class Solution {
        Solution sol = new Solution();
        Random test = new Random();
 
-       ListNode[] testlist = new ListNode[6];
-       for(int i = 0; i < 6; i++) {
-           testlist[i] = randomeNode(test.nextInt(4) + 1, test.nextInt(100) + 1);
+       ListNode[] testlist = new ListNode[3];
+       for(int i = 0; i < 3; i++) {
+           testlist[i] = randomeNode(test.nextInt(2) + 1, test.nextInt(100) + 1);
+           StdOut.println("Test " + i);
+           printlist(testlist[i]);
        }
+       StdOut.println("Merge Result");
        ListNode tk = sol.mergeKLists(testlist);
        printlist(tk);
-//       ListNode iter = testlist[0];
-//       while(iter != null) {
-//           StdOut.printf("val %d \n", iter.val);
-//           iter = iter.next;
-//       }
-//       StdOut.println("List 1");
-//       iter = testlist[1];
-//       while(iter != null) {
-//           StdOut.printf("val %d \n", iter.val);
-//           iter = iter.next;
-//       }
-//       iter = sol.mergeKLists(testlist);
-//       StdOut.println("linked");
-//       while(iter != null) {
-//           StdOut.printf("val %d \n", iter.val);
-//           iter = iter.next;
-//       }
    }
 }
