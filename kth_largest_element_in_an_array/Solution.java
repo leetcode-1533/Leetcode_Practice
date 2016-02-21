@@ -9,12 +9,16 @@ public class Solution {
     
     public int findKthLargest(int[] nums, int k) {
         int size = nums.length;
-        pq = new int[size];
+        int max = 0;
+        pq = new int[size + 1]; // start at 1
         for(int i = 0; i < size; i++) {
             insert(nums[i]);
         }
         
-        return 0;
+        while(k-- != 0) {
+            max = delMax();
+        }  
+        return max;
     }
     
     public void insert(int x) {
@@ -65,6 +69,7 @@ public class Solution {
      public static void main(String[] args) {
          Solution sol = new Solution();
          int[] input = {3, 2, 1, 5, 6, 4};
-         sol.findKthLargest(input, 1);
+         int k = 2;
+//         StdOut.printf("%dth largest: %d", k, sol.findKthLargest(input, k));
      }
 }
