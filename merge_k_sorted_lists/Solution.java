@@ -14,7 +14,7 @@ public class Solution {
 //           }
 //           lists = temp;
 //       }    
-       return lists[0];
+       return test;
    }
    
    private static ListNode merge(ListNode[] lists, int start, int end) {
@@ -31,8 +31,16 @@ public class Solution {
        
        int i = 0;
        while(liend != null) {
-           StdOut.printf("Step %dth: \n", i++);
+           i++;
+           StdOut.printf("ROOT Step %dth: \n", i);
            printlist(root);
+           
+           StdOut.printf("listart Step %dth: \n", i);
+           printlist(listart);
+           
+           StdOut.printf("liend Step %dth: \n", i);
+           printlist(liend);
+           
            if(listart.next == null) {
                listart.next = liend;
                return root;
