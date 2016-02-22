@@ -41,7 +41,7 @@ public class Solution {
            return listart;
        } 
        
-       if(listart.val < liend.val) { 
+       if(listart.val > liend.val) { 
            // listart should be the larger one
            ListNode temp = listart;
            listart = liend;
@@ -55,7 +55,7 @@ public class Solution {
                return root;
            }          
            
-           if(listart.next.val <= liend.val) {
+           if(listart.next.val >= liend.val) {
                ListNode liendnext = liend.next;
                insert(listart, liend);
                liend = liendnext;       
@@ -81,7 +81,7 @@ public class Solution {
        ListNode root = new ListNode(max);
        ListNode current = root;
        for(int i = 1; i <= len; i++) {
-           current.next = new ListNode(max - 5 * i + test.nextInt(6));       
+           current.next = new ListNode(max + 5 * i + test.nextInt(6));       
            current = current.next;
        }       
        return root;
@@ -102,14 +102,14 @@ public class Solution {
        Solution sol = new Solution();
        Random test = new Random();
 
-//       ListNode[] testlist = new ListNode[3];
-//       for(int i = 0; i < 3; i++) {
-//           testlist[i] = randomeNode(test.nextInt(2) + 1, test.nextInt(100) + 1);
-//           StdOut.println("Test " + i);
-//           printlist(testlist[i]);
-//       }
-//       StdOut.println("Merge Result");
-//       ListNode tk = sol.mergeKLists(testlist);
-//       printlist(tk);
+       ListNode[] testlist = new ListNode[3];
+       for(int i = 0; i < 3; i++) {
+           testlist[i] = randomeNode(test.nextInt(2) + 1, test.nextInt(100) + 1);
+           StdOut.println("Test " + i);
+           printlist(testlist[i]);
+       }
+       StdOut.println("Merge Result");
+       ListNode tk = sol.mergeKLists(testlist);
+       printlist(tk);
    }
 }
