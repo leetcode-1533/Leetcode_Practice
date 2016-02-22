@@ -35,6 +35,12 @@ public class Solution {
            liend = lists[end];      
        }
        
+       if(listart == null) {
+           return liend;
+       } else if (liend == null) {
+           return listart;
+       } 
+       
        if(listart.val < liend.val) { 
            // listart should be the larger one
            ListNode temp = listart;
@@ -67,12 +73,7 @@ public class Solution {
        join.next = temp;
    }
    
-//   private static void printlist(ListNode pri) {
-//       while(pri != null) {
-//           StdOut.printf("val %d \n", pri.val);
-//           pri = pri.next;        
-//       }
-//   }
+
 //   
    private static ListNode randomeNode(int len, int maxrange) {
        Random test = new Random();
@@ -85,23 +86,30 @@ public class Solution {
        }       
        return root;
    }
-   
+
+   private static void printlist(ListNode pri) {
+       while(pri != null) {
+           StdOut.printf("val %d \n", pri.val);
+           pri = pri.next;        
+       }
+   }
+
    public static void main(String[] args) {
-//       sol.mergeKLists(new ListNode[6]); 
+       //       sol.mergeKLists(new ListNode[6]); 
 //       StdOut.printf("Node Test %d\n next:", test.val);
 //       StdOut.println(test.next);
        
        Solution sol = new Solution();
        Random test = new Random();
 
-       ListNode[] testlist = new ListNode[3];
-       for(int i = 0; i < 3; i++) {
-           testlist[i] = randomeNode(test.nextInt(2) + 1, test.nextInt(100) + 1);
-           StdOut.println("Test " + i);
-           printlist(testlist[i]);
-       }
-       StdOut.println("Merge Result");
-       ListNode tk = sol.mergeKLists(testlist);
-       printlist(tk);
+//       ListNode[] testlist = new ListNode[3];
+//       for(int i = 0; i < 3; i++) {
+//           testlist[i] = randomeNode(test.nextInt(2) + 1, test.nextInt(100) + 1);
+//           StdOut.println("Test " + i);
+//           printlist(testlist[i]);
+//       }
+//       StdOut.println("Merge Result");
+//       ListNode tk = sol.mergeKLists(testlist);
+//       printlist(tk);
    }
 }
