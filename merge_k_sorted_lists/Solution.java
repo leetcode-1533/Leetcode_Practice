@@ -4,6 +4,10 @@ import java.util.Random;
 
 public class Solution {
    public ListNode mergeKLists(ListNode[] lists) {
+       if(lists.length == 0) {
+           return null;
+       }
+       
        while(lists.length != 1) {
            ListNode[] temp;
            
@@ -63,13 +67,13 @@ public class Solution {
        join.next = temp;
    }
    
-   private static void printlist(ListNode pri) {
-       while(pri != null) {
-           StdOut.printf("val %d \n", pri.val);
-           pri = pri.next;        
-       }
-   }
-   
+//   private static void printlist(ListNode pri) {
+//       while(pri != null) {
+//           StdOut.printf("val %d \n", pri.val);
+//           pri = pri.next;        
+//       }
+//   }
+//   
    private static ListNode randomeNode(int len, int maxrange) {
        Random test = new Random();
        int max = test.nextInt(maxrange);
