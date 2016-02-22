@@ -74,26 +74,6 @@ public class Solution {
    }
    
 
-//   
-   private static ListNode randomeNode(int len, int maxrange) {
-       Random test = new Random();
-       int max = test.nextInt(maxrange);
-       ListNode root = new ListNode(max);
-       ListNode current = root;
-       for(int i = 1; i <= len; i++) {
-           current.next = new ListNode(max + 5 * i + test.nextInt(6));       
-           current = current.next;
-       }       
-       return root;
-   }
-
-   private static void printlist(ListNode pri) {
-       while(pri != null) {
-           StdOut.printf("val %d \n", pri.val);
-           pri = pri.next;        
-       }
-   }
-
    public static void main(String[] args) {
        //       sol.mergeKLists(new ListNode[6]); 
 //       StdOut.printf("Node Test %d\n next:", test.val);
@@ -104,12 +84,12 @@ public class Solution {
 
        ListNode[] testlist = new ListNode[3];
        for(int i = 0; i < 3; i++) {
-           testlist[i] = randomeNode(test.nextInt(2) + 1, test.nextInt(100) + 1);
+           testlist[i] = ListNode.randomeNode(test.nextInt(2) + 1, test.nextInt(100) + 1);
            StdOut.println("Test " + i);
-           printlist(testlist[i]);
+           ListNode.printlist(testlist[i]);
        }
        StdOut.println("Merge Result");
        ListNode tk = sol.mergeKLists(testlist);
-       printlist(tk);
+       ListNode.printlist(tk);
    }
 }
