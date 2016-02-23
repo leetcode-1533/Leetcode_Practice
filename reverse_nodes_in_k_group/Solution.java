@@ -9,12 +9,12 @@ public class Solution {
         ListNode rec = new ListNode(0);
         ListNode p = head;
         ListNode pold = head;
-        ListNode temp;                
+        ListNode temp = head;    
         
-        while(head != null) {
+        // test for k
+        if(head != null) {
             pold = head;
 
-            // test for k
             while(i++ < (k - 1) && head.next != null) // head in the last section's tail, guaranteed section complete
                 head = head.next;
             
@@ -25,9 +25,28 @@ public class Solution {
                 pold.next = temp;
                 head = temp;
                 i = 0;
-            } else {
-                rec.next = p;
-            }                     
+            } 
+            
+            rec.next = p;
+        }
+        
+        while(head != null) {
+            ListNode tk = temp;
+            
+            // test for k
+            while(i++ < (k - 1) && head.next != null) // head in the last section's tail, guaranteed section complete
+                head = head.next;
+            
+            
+            if(i == k) {
+                temp = head.next;
+                head.next = null; // cut the section
+                p = reversetillnull(tk);
+                pold.next = p;
+                head = temp;
+                pold = tk;
+                i = 0;
+            } 
         }
         return rec.next;
             
@@ -47,7 +66,7 @@ public class Solution {
     }
     
     public static void main(String[] args) {
-        ListNode test = ListNode.randomeNode(5, 100);
+        ListNode test = ListNode.randomeNode(6, 100);
         ListNode.printlist(test);
 
         Solution sol = new Solution();
