@@ -10,26 +10,26 @@ public class Solution {
         ListNode evenhead = head.next;
         ListNode ep = evenhead;
         
-        head = head.next;
         
-        while(head.next != null) {
+        while(head != null) {
             head = head.next;
-            op.next = head;
-            op = head;
-            if(head.next != null) {
-                head = head.next;
-                ep.next = head;
-                ep = head;
-            } else {
-                
+            if(head != null) {
+                head = head.next;  // increment by 2
+                op.next = head;
+                op = head;
+                if(head != null) {
+                    ep.next = head.next;
+                    ep = head.next;                 
+                }         
             }
         }
+        
         op.next = evenhead;
         return oddhead;      
     }
     
     public static void main(String[] args) {
-        ListNode test = ListNode.randomeNode(3, 100);
+        ListNode test = ListNode.randomeNode(2, 100);
         StdOut.println(test);
 
         Solution sol = new Solution();
