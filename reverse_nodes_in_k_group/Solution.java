@@ -72,12 +72,12 @@ public class Solution {
     
     public static void main(String[] args) {
         ListNode test = ListNode.randomeNode(5, 100);
-        ListNode.printlist(test);
+        StdOut.println(test);
 
         Solution sol = new Solution();
         StdOut.println("reverseKGroup");
         test = sol.reverseKGroup(test, 3);
-        ListNode.printlist(test);
+        StdOut.println(test);
 
     }
 }

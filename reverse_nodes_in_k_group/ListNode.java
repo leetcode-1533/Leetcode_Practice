@@ -25,12 +25,6 @@ public class ListNode {
          val = x; 
      }
      
-     public static void printlist(ListNode pri) {
-         while(pri != null) {
-             StdOut.printf("val %d \n", pri.val);
-             pri = pri.next;        
-         }
-     }
      
      public static ListNode randomeNode(int len, int maxrange) {
          Random test = new Random();
