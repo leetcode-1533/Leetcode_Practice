@@ -25,9 +25,11 @@ public class Solution {
                 pold.next = temp;
                 head = temp;
                 i = 0;
-            } 
+                rec.next = p;
+            } else {
+                return pold;
+            }
             
-            rec.next = p;
         }
         
         while(head != null) {
@@ -68,7 +70,7 @@ public class Solution {
     }
     
     public static void main(String[] args) {
-        ListNode test = ListNode.randomeNode(3, 100);
+        ListNode test = ListNode.randomeNode(4, 100);
         ListNode.printlist(test);
 
         Solution sol = new Solution();
