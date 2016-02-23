@@ -41,12 +41,14 @@ public class Solution {
             if(i == k) {
                 temp = head.next;
                 head.next = null; // cut the section
-                p = reversetillnull(tk);
-                pold.next = p;
+                reversetillnull(tk);
+                pold.next = head;
                 head = temp;
                 pold = tk;
                 i = 0;
-            } 
+            } else {
+                pold.next = tk;
+            }
         }
         return rec.next;
             
@@ -66,12 +68,12 @@ public class Solution {
     }
     
     public static void main(String[] args) {
-        ListNode test = ListNode.randomeNode(6, 100);
+        ListNode test = ListNode.randomeNode(3, 100);
         ListNode.printlist(test);
 
         Solution sol = new Solution();
         StdOut.println("reverseKGroup");
-        test = sol.reverseKGroup(test, 3);
+        test = sol.reverseKGroup(test, 4);
         ListNode.printlist(test);
 
     }
