@@ -21,7 +21,7 @@ public class Solution {
             if(i == k) {
                 temp = head.next;
                 head.next = null; // cut the section
-                p = reversetillnull(pold);
+                p = reversetillnull(pold, k);
                 pold.next = temp;
                 head = temp;
                 i = 0;
@@ -43,7 +43,7 @@ public class Solution {
             if(i == k) {
                 temp = head.next;
                 head.next = null; // cut the section
-                reversetillnull(tk);
+                reversetillnull(tk, k);
                 pold.next = head;
                 head = temp;
                 pold = tk;
@@ -56,12 +56,11 @@ public class Solution {
         return rec.next;
             
     }
-    public ListNode reversetillnull(ListNode head) {
+    public ListNode reversetillnull(ListNode head, int k) {
         ListNode current = head;
         ListNode previous = null;
         ListNode next;
-  
-        while(current != null) {
+        while(k-- !=0) {
             next = current.next;
             current.next = previous;
             previous = current;
