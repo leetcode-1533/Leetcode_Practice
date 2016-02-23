@@ -50,6 +50,7 @@ public class Solution {
                 i = 0;
             } else {
                 pold.next = tk;
+                head = null;
             }
         }
         return rec.next;
@@ -70,12 +71,12 @@ public class Solution {
     }
     
     public static void main(String[] args) {
-        ListNode test = ListNode.randomeNode(4, 100);
+        ListNode test = ListNode.randomeNode(5, 100);
         ListNode.printlist(test);
 
         Solution sol = new Solution();
         StdOut.println("reverseKGroup");
-        test = sol.reverseKGroup(test, 4);
+        test = sol.reverseKGroup(test, 3);
         ListNode.printlist(test);
 
     }
