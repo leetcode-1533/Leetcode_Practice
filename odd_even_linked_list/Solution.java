@@ -7,8 +7,15 @@ public class Solution {
     public ListNode oddEvenList(ListNode head) {
         ListNode oddhead = head;
         ListNode op = oddhead;
-        ListNode evenhead = head.next;
-        ListNode ep = evenhead;
+        
+        ListNode evenhead;
+        ListNode ep;
+        if(head != null) {         
+            evenhead = head.next;
+            ep = evenhead;
+        } else {
+            return null;
+        }
         
         
         while(head != null) {
@@ -16,20 +23,19 @@ public class Solution {
             if(head != null) {
                 head = head.next;  // increment by 2
                 op.next = head;
-                op = head;
                 if(head != null) {
+                    op = head; // in case op == null such that op.next doesn't stand
                     ep.next = head.next;
                     ep = head.next;                 
                 }         
             }
-        }
-        
+        }       
         op.next = evenhead;
         return oddhead;      
     }
     
     public static void main(String[] args) {
-        ListNode test = ListNode.randomeNode(2, 100);
+        ListNode test = ListNode.randomeNode(0, 100);
         StdOut.println(test);
 
         Solution sol = new Solution();
