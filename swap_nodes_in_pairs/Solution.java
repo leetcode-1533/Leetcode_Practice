@@ -3,7 +3,7 @@ package swap_nodes_in_pairs;
 import edu.princeton.cs.algs4.StdOut; 
 // https://leetcode.com/problems/swap-nodes-in-pairs/
 public class Solution {
-    public ListNode swapParis(ListNode head) {
+    public ListNode swapPairs(ListNode head) {
         ListNode dummyhead = new ListNode(0);
         ListNode p = dummyhead;
         while(head != null) {
@@ -24,7 +24,7 @@ public class Solution {
     }
     
     public static void main(String[] args) {
-        ListNode test = ListNode.randomeNode(1, 100);
+        ListNode test = ListNode.randomeNode(0, 100);
         ListNode.printlist(test);
         StdOut.println("After swap");
         Solution sol = new Solution();
