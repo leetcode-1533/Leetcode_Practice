@@ -36,12 +36,13 @@ public class ListNode {
          Random test = new Random();
          int max = test.nextInt(maxrange);
          ListNode root = new ListNode(max);
+         
          ListNode current = root;
-         for(int i = 1; i <= len; i++) {
+         for(int i = 0; i < len; i++) {
              current.next = new ListNode(max + 5 * i + test.nextInt(6));       
              current = current.next;
          }       
-         return root;
+         return root.next;
      }
      
      public static void main(String[] args) {
