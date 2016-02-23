@@ -7,7 +7,6 @@ public class Solution {
     public ListNode reverseKGroup(ListNode head, int k) {
         int i = 0;
         ListNode rec = new ListNode(0);
-        ListNode p = head;
         ListNode pold = head;
         ListNode temp = head;    
         
@@ -21,7 +20,7 @@ public class Solution {
             tail = head;
                       
             if(i == k) { // contain k
-                rec.next = tail;
+                rec.next = tail;                
                 tail = tail.next; // the header of the next section
                 reversetillnull(pold, k);
                 pold.next = tail; // indent to the next section
@@ -33,26 +32,25 @@ public class Solution {
         }
         
         while(head != null) {
-            
+            temp = pold;
             // test for k
+            pold = head;
             while(i++ < (k - 1) && head.next != null) // head in the last section's tail, guaranteed section complete
                 head = head.next;
             tail = head;
                     
             if(i == k) {
-                rec.next = tail;
+                temp.next = tail;
                 tail = tail.next;
                 reversetillnull(pold, k);
                 pold.next = tail; // indent to the next section
                 head = tail; // indent to the next section
                 i = 0;
-            } else {
-                
-                head = null;              
+            } else {  
+                temp.next = pold;
             }
         }
-        return rec.next;
-            
+        return rec.next;            
     }
     public void reversetillnull(ListNode head, int k) {
         ListNode current = head;
@@ -67,12 +65,12 @@ public class Solution {
     }
     
     public static void main(String[] args) {
-        ListNode test = ListNode.randomeNode(5, 100);
+        ListNode test = ListNode.randomeNode(3, 100);
         StdOut.println(test);
 
         Solution sol = new Solution();
         StdOut.println("reverseKGroup");
-        test = sol.reverseKGroup(test, 3);
+        test = sol.reverseKGroup(test, 2);
         StdOut.println(test);
 
     }
