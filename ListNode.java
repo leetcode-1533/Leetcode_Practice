@@ -1,12 +1,25 @@
-package ListNode;
+package swap_nodes_in_pairs;
 
 import java.util.Random;
 
 import edu.princeton.cs.algs4.StdOut;
 
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+
 public class ListNode {
      int val;
      ListNode next;
+     
+     public ListNode() {
+         val = 0;
+     }
      
      public ListNode(int x) {
          val = x; 
@@ -23,12 +36,13 @@ public class ListNode {
          Random test = new Random();
          int max = test.nextInt(maxrange);
          ListNode root = new ListNode(max);
+         
          ListNode current = root;
-         for(int i = 1; i <= len; i++) {
+         for(int i = 0; i < len; i++) {
              current.next = new ListNode(max + 5 * i + test.nextInt(6));       
              current = current.next;
          }       
-         return root;
+         return root.next;
      }
      
      public static void main(String[] args) {
