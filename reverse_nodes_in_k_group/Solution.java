@@ -48,6 +48,7 @@ public class Solution {
                 i = 0;
             } else {  
                 temp.next = pold;
+                head = null; // force stop
             }
         }
         return rec.next;            
@@ -70,7 +71,7 @@ public class Solution {
 
         Solution sol = new Solution();
         StdOut.println("reverseKGroup");
-        test = sol.reverseKGroup(test, 2);
+        test = sol.reverseKGroup(test, 3);
         StdOut.println(test);
 
     }
