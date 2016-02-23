@@ -62,7 +62,7 @@ public class ListNode {
          for(int i = 0; i < 3; i++) {
              testlist[i] = randomeNode(test.nextInt(2) + 1, test.nextInt(100) + 1);
              StdOut.println("Test " + i);
-             printlist(testlist[i]);
+             StdOut.println(testlist[i]);
          }
          StdOut.println(testlist[0].toString());
      }
