@@ -1,7 +1,7 @@
 package reverse_nodes_in_k_group;
 
 import java.util.Random;
-
+import java.lang.StringBuilder;
 import edu.princeton.cs.algs4.StdOut;
 
 /**
@@ -45,6 +45,18 @@ public class ListNode {
          return root.next;
      }
      
+     public String toString() {
+         StringBuilder s = new StringBuilder();
+
+         ListNode current = this;
+         while(current.next != null) {
+             s.append(current.val +" -> ");
+             current = current.next;         
+         }
+         s.append(current.val);
+         return s.toString();       
+     }
+     
      public static void main(String[] args) {
          //       sol.mergeKLists(new ListNode[6]); 
 //         StdOut.printf("Node Test %d\n next:", test.val);
@@ -58,5 +70,6 @@ public class ListNode {
              StdOut.println("Test " + i);
              printlist(testlist[i]);
          }
+         StdOut.println(testlist[0].toString());
      }
 }
