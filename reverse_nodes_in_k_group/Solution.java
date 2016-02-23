@@ -11,52 +11,50 @@ public class Solution {
         ListNode pold = head;
         ListNode temp = head;    
         
+        ListNode tail = head;
+        
         // test for k
         if(head != null) {
             pold = head;
-
             while(i++ < (k - 1) && head.next != null) // head in the last section's tail, guaranteed section complete
                 head = head.next;
-            
-            if(i == k) {
-                temp = head.next;
-                head.next = null; // cut the section
-                p = reversetillnull(pold, k);
-                pold.next = temp;
-                head = temp;
+            tail = head;
+                      
+            if(i == k) { // contain k
+                rec.next = tail;
+                tail = tail.next; // the header of the next section
+                reversetillnull(pold, k);
+                pold.next = tail; // indent to the next section
+                head = tail; // indent to the next section
                 i = 0;
-                rec.next = p;
             } else {
                 return pold;
-            }
-            
+            }           
         }
         
         while(head != null) {
-            ListNode tk = temp;
             
             // test for k
             while(i++ < (k - 1) && head.next != null) // head in the last section's tail, guaranteed section complete
                 head = head.next;
-            
-            
+            tail = head;
+                    
             if(i == k) {
-                temp = head.next;
-                head.next = null; // cut the section
-                reversetillnull(tk, k);
-                pold.next = head;
-                head = temp;
-                pold = tk;
+                rec.next = tail;
+                tail = tail.next;
+                reversetillnull(pold, k);
+                pold.next = tail; // indent to the next section
+                head = tail; // indent to the next section
                 i = 0;
             } else {
-                pold.next = tk;
-                head = null;
+                
+                head = null;              
             }
         }
         return rec.next;
             
     }
-    public ListNode reversetillnull(ListNode head, int k) {
+    public void reversetillnull(ListNode head, int k) {
         ListNode current = head;
         ListNode previous = null;
         ListNode next;
@@ -66,7 +64,6 @@ public class Solution {
             previous = current;
             current = next;        
         }
-        return previous;
     }
     
     public static void main(String[] args) {
