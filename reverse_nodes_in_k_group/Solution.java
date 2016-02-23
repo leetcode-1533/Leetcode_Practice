@@ -8,8 +8,7 @@ public class Solution {
         int i = 0;
         ListNode rec = new ListNode(0);
         ListNode pold = head;
-        ListNode temp = head;    
-        
+        ListNode temp = head;           
         ListNode tail = head;
         
         // test for k
