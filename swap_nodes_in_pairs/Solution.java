@@ -28,7 +28,7 @@ public class Solution {
         ListNode.printlist(test);
         StdOut.println("After swap");
         Solution sol = new Solution();
-        test = sol.swapParis(test);
+        test = sol.swapPairs(test);
         ListNode.printlist(test);        
     }
 
