@@ -8,26 +8,36 @@ public class Solution {
         if(head == null) {
             return null;
         }
+        
+        if(head.next != null && head.val > head.next.val) {
+            ListNode temp = head.next;
+            head.next = temp.next;
+            temp.next = head; 
+            head = temp;
+        }
         ListNode tail = head;
-        if(head.val > head.next.val) {
-            tail = head.next;
+      
+        ListNode temp = tail;
+        ListNode iter = temp.next;
+        
+        while(iter.next != null) {
+            if(iter.next.val < iter.val) {
+                temp = exch(temp, iter, iter.next);            
+            }
         }
 
-        ListNode st = head;       
-        if(st.next != null) {
-            if(st.next.val < st.val)
-                exch(st, st.next);    
-            else if(st.next != null)
-                st = st.next;
-        }
         
         return tail;    
     }
     
-    private void exch(ListNode fir, ListNode sec) {
-        ListNode temp = sec.next;
-        sec.next = fir;
-        fir.next = temp;     
+    private ListNode exch(ListNode before, ListNode middle, ListNode after) {
+        ListNode fourth = after.next;
+        
+        before.next = after;
+        after.next = middle;
+        middle.next = fourth;
+        
+        return after;  
     }
 
     
