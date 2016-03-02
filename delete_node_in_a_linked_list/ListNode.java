@@ -14,8 +14,8 @@ import edu.princeton.cs.algs4.StdOut;
  */
 
 public class ListNode {
-     int val;
-     ListNode next;
+     public int val;
+     public ListNode next;
      
      public ListNode() {
          val = 0;
@@ -33,7 +33,7 @@ public class ListNode {
          
          ListNode current = root;
          for(int i = 0; i < len; i++) {
-             current.next = new ListNode(max + 5 * i + test.nextInt(6));       
+             current.next = new ListNode(max - 5 * i + test.nextInt(6));       
              current = current.next;
          }       
          return root.next;
