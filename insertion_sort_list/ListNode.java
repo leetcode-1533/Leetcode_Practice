@@ -1,4 +1,4 @@
-package delete_node_in_a_linked_list;
+package insertion_sort_list;
 
 import java.util.Random;
 import java.lang.StringBuilder;
@@ -33,7 +33,7 @@ public class ListNode {
          
          ListNode current = root;
          for(int i = 0; i < len; i++) {
-             current.next = new ListNode(max - 4 * i + test.nextInt(6));       
+             current.next = new ListNode(max - 1 * i + test.nextInt(2));       
              current = current.next;
          }       
          return root.next;
@@ -56,14 +56,7 @@ public class ListNode {
 //         StdOut.printf("Node Test %d\n next:", test.val);
 //         StdOut.println(test.next);
          
-         Random test = new Random();
-
-         ListNode[] testlist = new ListNode[3];
-         for(int i = 0; i < 3; i++) {
-             testlist[i] = randomeNode(test.nextInt(2) + 1, test.nextInt(100) + 1);
-             StdOut.println("Test " + i);
-             StdOut.println(testlist[i]);
-         }
-         StdOut.println(testlist[0].toString());
+         ListNode test = ListNode.randomeNode(5, 3);
+         StdOut.println(test);
      }
 }
