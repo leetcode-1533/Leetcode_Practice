@@ -10,14 +10,32 @@ public class Solution {
         }
         ListNode dummy = new ListNode(0);
         dummy.next = head;
-        ListNode pointer = head;
+//        ListNode pointer = head;
         
         for(ListNode i = head; i.next != null; i = i.next) {
-            StdOut.println();
-            StdOut.println("i: " + i.next);
-            for(ListNode j = dummy; j != i.next; j = j.next) {
-                if(j.next.val > i.next.val) {
-                    StdOut.println("EXCH: j: " + j.next);
+//            StdOut.println();
+//            StdOut.println("i: " + i.next);
+            for(ListNode j = dummy; j.next != i.next; j = j.next) {
+                if(i.next.val < j.next.val) {
+                    ListNode in = i.next;
+                    ListNode jn = j.next;
+                    ListNode inn = in.next;
+                    ListNode jnn = jn.next;
+                    if(j.next == i) {
+                        j.next = in;
+                        in.next = jn;
+                        jn.next = inn;    
+                        i = in;
+                    } else {
+                        j.next = in;
+                        in.next = jn;
+
+                        i.next = inn;
+                        i = jn;
+                    }
+                    StdOut.println("Dummy" + dummy);
+
+                    break;
                 }
             }
         }
@@ -33,7 +51,8 @@ public class Solution {
         StdOut.println(test);
 
         Solution sol = new Solution();
-        sol.insertionSortList(test);
+        test = sol.insertionSortList(test);
+        StdOut.println(test);
     }
 
 }
