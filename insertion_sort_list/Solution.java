@@ -12,11 +12,11 @@ public class Solution {
         dummy.next = head;
         ListNode pointer = head;
         
-        for(ListNode i = head; i != null; i = i.next) {
+        for(ListNode i = head; i.next != null; i = i.next) {
             StdOut.println();
-            StdOut.println("i: " + i);
-            for(ListNode j = dummy; j != i; j = j.next) {
-                if(j.next.val > i.val) {
+            StdOut.println("i: " + i.next);
+            for(ListNode j = dummy; j != i.next; j = j.next) {
+                if(j.next.val > i.next.val) {
                     StdOut.println("EXCH: j: " + j.next);
                 }
             }
