@@ -13,6 +13,7 @@ public class Solution {
         ListNode in;
         ListNode jn;
         ListNode inn;
+        ListNode temp = new ListNode(0);
 //        ListNode jnn = jn.next;
         
         for(ListNode i = head; i.next != null; i = i.next) {
@@ -31,13 +32,14 @@ public class Solution {
                         jn.next = inn;    
                         i = in;
                     } else {
+                        temp.next = i;
                         j.next = in;
                         in.next = jn;
 
                         i.next = inn;
-                        i = jn;
+                        i = temp;
                     }
-                    StdOut.println("Dummy" + dummy);
+//                    StdOut.println("Dummy" + dummy);
 
                     break;
                 }
