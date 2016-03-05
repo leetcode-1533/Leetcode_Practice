@@ -14,25 +14,49 @@ import java.util.HashMap;
 public class Solution {
     public RandomListNode copyRandomList(RandomListNode head) {
         RandomListNode dummy = new RandomListNode(0);
-        RandomListNode p = dummy;
-        
-        RandomListNode thead = head;
-        HashMap<RandomListNode, RandomListNode> map = new HashMap<RandomListNode, RandomListNode>();
-        while(head != null) {
-            p.next = new RandomListNode(head.label);
-            map.put(head, p.next);
-            p = p.next;
-            head = head.next;
-        }
-        
-        head = thead;
-        p = dummy.next;
-        while(head != null) {
-            p.random = map.get(head.random);
-            head = head.next;
-            p = p.next;
+        RandomListNode htemp = head;
+        while(htemp != null) {
+            RandomListNode ntemp = htemp.next;
+            htemp.next = new RandomListNode(htemp.label);
+            htemp.next.next = ntemp;
+            
+            htemp = ntemp;           
         } 
-         
+        
+//        RandomListNode tk = head;
+//        while(tk != null) {
+//            StdOut.printf("current %d, random %d\n", tk.label, 0);
+//            tk = tk.next;
+//        }
+                  
+        if(head != null)
+            dummy.next = head.next;
+        
+        htemp = head;
+        while(htemp != null) {
+            RandomListNode h1 = htemp.next;
+            StdOut.printf("htemp.random: %d htemp.random.next: %d \n", htemp.random.label, htemp.random.next.label);
+
+            
+            
+            if(htemp.random != null)
+                htemp.next.random = htemp.random.next;
+                       
+            
+
+            
+            htemp.next = htemp.next.next;
+            htemp = htemp.next;
+
+            
+            if(htemp != null)
+                h1.next = htemp.next;  
+            else 
+                h1.next = null;
+            
+
+        }
+
         return dummy.next;
     }
     public static void main(String[] args) {
