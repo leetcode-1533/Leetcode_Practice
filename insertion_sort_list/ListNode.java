@@ -25,6 +25,16 @@ public class ListNode {
          val = x; 
      }
      
+     public static ListNode fromlist(int[] li) {
+         ListNode dummy = new ListNode(0);
+         ListNode p = dummy;
+         for(int item : li) {
+             p.next = new ListNode(item);
+             p = p.next;    
+         }
+         
+         return dummy.next;
+     }
      
      public static ListNode randomeNode(int len, int maxrange) {
          Random test = new Random();
