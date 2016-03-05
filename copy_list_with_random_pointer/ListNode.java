@@ -1,4 +1,4 @@
-package insertion_sort_list;
+package copy_list_with_random_pointer;
 
 import java.util.Random;
 import java.lang.StringBuilder;
@@ -14,10 +14,7 @@ import edu.princeton.cs.algs4.StdOut;
  */
 
 public class ListNode {
-    
-      
-    public int label;
-    
+
      public int val;
      public ListNode next;
      
