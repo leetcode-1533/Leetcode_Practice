@@ -15,36 +15,29 @@ public class Solution {
         ListNode inn;
         ListNode temp = new ListNode(0);
 //        ListNode jnn = jn.next;
-        
-        for(ListNode i = head; i.next != null; i = i.next) {
+        for(ListNode i = head; i.next != null; ) {
 //            StdOut.println();
-//            StdOut.println("i: " + i.next);
+            boolean inserted = false;
             for(ListNode j = dummy; j.next != i.next; j = j.next) {
                 if(i.next.val < j.next.val) {
                      in = i.next;
                      jn = j.next;
                      inn = in.next;
 //                     jnn = jn.next;
-
-                    if(j.next == i) {
                         j.next = in;
                         in.next = jn;
-                        jn.next = inn;    
-                        i = in;
-                    } else {
-                        temp.next = i;
-                        j.next = in;
-                        in.next = jn;
-
-                        i.next = inn;
-                        i = temp;
+                        i.next = inn; 
+                        
+                        inserted = true;
+                        
+                        break;
                     }
-//                    StdOut.println("Dummy" + dummy);
-
-                    break;
                 }
+//                    StdOut.println("Dummy" + dummy);
+                if(!inserted)
+                    i = i.next;
             }
-        }
+        
             
         
         return dummy.next;
