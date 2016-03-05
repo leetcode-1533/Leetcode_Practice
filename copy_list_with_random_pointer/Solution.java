@@ -23,39 +23,26 @@ public class Solution {
             htemp = ntemp;           
         } 
         
-//        RandomListNode tk = head;
-//        while(tk != null) {
-//            StdOut.printf("current %d, random %d\n", tk.label, 0);
-//            tk = tk.next;
-//        }
-                  
-        if(head != null)
-            dummy.next = head.next;
+        RandomListNode p = dummy;  
+        
+        htemp = head;
+        while(htemp != null) {            
+            if(htemp.random != null)
+                htemp.next.random = htemp.random.next;
+            htemp = htemp.next.next;
+        }
         
         htemp = head;
         while(htemp != null) {
-            RandomListNode h1 = htemp.next;
-            StdOut.printf("htemp.random: %d htemp.random.next: %d \n", htemp.random.label, htemp.random.next.label);
-
+            RandomListNode temp = htemp.next.next;
             
+            p.next = htemp.next;      
+            htemp.next = temp;
             
-            if(htemp.random != null)
-                htemp.next.random = htemp.random.next;
-                       
-            
-
-            
-            htemp.next = htemp.next.next;
             htemp = htemp.next;
-
-            
-            if(htemp != null)
-                h1.next = htemp.next;  
-            else 
-                h1.next = null;
-            
-
+            p = p.next;          
         }
+        
 
         return dummy.next;
     }
