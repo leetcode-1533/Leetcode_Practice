@@ -17,7 +17,7 @@ public class Solution {
         int size = m * n;
         
         ArrayList<Integer> acu = new ArrayList<Integer>();
-        while(size != 0) {
+        while(size > 0) {
             jtraverse(matrix, top, left, acu, n, true);
             itraverse(matrix, top + 1, right, acu, m - 1, true);
             jtraverse(matrix, bottom, right - 1, acu, n - 1, false);
@@ -37,11 +37,11 @@ public class Solution {
     
     private void itraverse(int[][] matrix, int istart, int j, ArrayList<Integer> acu, int leng, boolean norder) {
         if(norder) {
-            while(leng-- != 0) {
+            while(leng-- > 0) {
                 acu.add(matrix[istart++][j]);
             } 
         } else {
-            while(leng-- != 0) {
+            while(leng-- > 0) {
                 acu.add(matrix[istart--][j]);
             }          
         }
@@ -49,11 +49,11 @@ public class Solution {
     
     private void jtraverse(int[][] matrix, int i, int jstart, ArrayList<Integer> acu, int leng, boolean norder) {
         if(norder) {
-            while(leng-- != 0) {
+            while(leng-- > 0) {
                 acu.add(matrix[i][jstart++]);
             } 
         } else {
-            while(leng-- != 0) {
+            while(leng-- > 0) {
                 acu.add(matrix[i][jstart--]);
             }          
         }
@@ -61,7 +61,7 @@ public class Solution {
     
     public static void main(String[] args) {
         Solution sol = new Solution();
-        List<Integer> test = sol.spiralOrder(new int[][] {{1, 2}, {2, 4}});
+        List<Integer> test = sol.spiralOrder(new int[][] {{1}});
         StdOut.println(test);
     }
 
