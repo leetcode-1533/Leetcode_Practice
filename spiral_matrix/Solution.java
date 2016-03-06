@@ -1,6 +1,7 @@
 package spiral_matrix;
 
 import java.util.*;
+import edu.princeton.cs.algs4.StdOut;
 
 public class Solution {
     public List<Integer> spiralOrder(int[][] matrix) {
@@ -56,6 +57,12 @@ public class Solution {
                 acu.add(matrix[i][jstart--]);
             }          
         }
+    }
+    
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+        List<Integer> test = sol.spiralOrder(new int[][] {{1, 2}, {2, 4}});
+        StdOut.println(test);
     }
 
 }
