@@ -7,14 +7,17 @@ public class Solution {
     public List<Integer> spiralOrder(int[][] matrix) {
         if(matrix == null || matrix.length == 0)
             return null;
-        int top = 0;
-        int left = 0;
-        int bottom = matrix[0].length - 1;
-        int right = matrix.length - 1;
         
         int n = matrix[0].length;
         int m = matrix.length;
         int size = m * n;
+        
+        int top = 0;
+        int left = 0;
+        int bottom = m - 1;
+        int right = n - 1;
+        
+
         
         ArrayList<Integer> acu = new ArrayList<Integer>();
         while(size > 0) {
@@ -61,7 +64,11 @@ public class Solution {
     
     public static void main(String[] args) {
         Solution sol = new Solution();
-        List<Integer> test = sol.spiralOrder(new int[][] {{1}});
+        int [][] tk= {
+                {1, 2, 3},
+                {4, 5, 6},
+        };
+        List<Integer> test = sol.spiralOrder(tk);
         StdOut.println(test);
     }
 
