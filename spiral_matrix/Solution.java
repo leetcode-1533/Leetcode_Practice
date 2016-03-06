@@ -39,7 +39,6 @@ public class Solution {
             if(size <= 0)
                 break;
             
-            size = size + 4 - 2 * m - 2 * n;
             top += 1;
             bottom -= 1;
             left += 1;
