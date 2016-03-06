@@ -5,8 +5,10 @@ import edu.princeton.cs.algs4.StdOut;
 
 public class Solution {
     public List<Integer> spiralOrder(int[][] matrix) {
+        ArrayList<Integer> acu = new ArrayList<Integer>();
+
         if(matrix == null || matrix.length == 0)
-            return null;
+            return acu;
         
         int n = matrix[0].length;
         int m = matrix.length;
@@ -19,12 +21,23 @@ public class Solution {
         
 
         
-        ArrayList<Integer> acu = new ArrayList<Integer>();
-        while(size > 0) {
+        while(true) {
             jtraverse(matrix, top, left, acu, n, true);
+            size -= n;
+            if(size <= 0)
+                break;
             itraverse(matrix, top + 1, right, acu, m - 1, true);
+            size -= m - 1;
+            if(size <= 0)
+                break;
             jtraverse(matrix, bottom, right - 1, acu, n - 1, false);
+            size -= n - 1;
+            if(size <= 0)
+                break;
             itraverse(matrix, bottom - 1, left, acu, m - 2, false);
+            size -= m - 2;
+            if(size <= 0)
+                break;
             
             size = size + 4 - 2 * m - 2 * n;
             top += 1;
@@ -65,8 +78,10 @@ public class Solution {
     public static void main(String[] args) {
         Solution sol = new Solution();
         int [][] tk= {
-                {1, 2, 3},
-                {4, 5, 6},
+                {1, 2, 3, 4},
+                {5, 6, 7 ,8},
+                {9, 10, 11, 12},
+                {13, 14, 15, 16}
         };
         List<Integer> test = sol.spiralOrder(tk);
         StdOut.println(test);
