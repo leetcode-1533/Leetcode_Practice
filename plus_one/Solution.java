@@ -10,36 +10,35 @@ public class Solution {
             return null;
         
         ArrayList<Integer> ans = new ArrayList<Integer>();
-        int carry = 0;
-        int sum = digits[0] + 1;
+        int carry = 1;
+        int sum = 0;
         
         for(int i = 0; i < digits.length; i++) {
-            if(i == 0)
-                sum = digits[0] + 1;
-            else 
-                sum = digits[i] + carry;
+
+            sum = digits[digits.length - 1 - i] + carry;
             
             if(sum >= 10) {
-                sum /= 10;
+                sum %= 10;
                 carry = 1;
             } else {
                 carry = 0;
             }
-            ans.add(i, sum);            
+            ans.add(sum);            
         }
+        
         if(carry == 1)
-            ans.add(digits.length, 1);
+            ans.add(1);
         
         int[] ret = new int[ans.size()];
         for(int i = 0; i < ans.size(); i++) {
-            ret[i] = ans.get(i);
+            ret[ans.size() - 1 - i] = ans.get(i);
         }
         return ret;
     }
     
     public static void main(String[] args) {
         Solution sol = new Solution();
-        int[] ans = sol.plusOne(new int[] {3, 5, 6 ,7});
+        int[] ans = sol.plusOne(new int[] {9, 9});
         StdOut.println(Arrays.toString(ans));
     }
     
