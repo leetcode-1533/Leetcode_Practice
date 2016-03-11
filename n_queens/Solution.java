@@ -2,6 +2,9 @@ package n_queens;
 
 import java.util.*;
 
+/*
+ * N Queen I and N Queen II shared the same answer, please track the commit history for N Queen II
+ */
 public class Solution {
     private class Board {
         boolean[][] board;
