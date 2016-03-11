@@ -12,7 +12,7 @@ public class Solution {
         }        
     };
         
-    private boolean isValid(String s, int n) {
+    private boolean isValid(StringBuilder s, int n) {
         Stack<Character> st = new Stack<Character>();
 
         for(int i = 0; i < s.length(); i++) {
@@ -45,7 +45,7 @@ public class Solution {
             for(int i = 0; i < charenum.length; i++) {
                 int len = substr.length();
                 substr.append(charenum[i]);
-                if(isValid(substr.toString(), n)) {
+                if(isValid(substr, n)) {
                     generateParenthesis(substr, container, n);                   
                 }
                 substr.deleteCharAt(len);
