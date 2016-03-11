@@ -31,14 +31,15 @@ public class Solution {
         
         ArrayList<Board> perm(int level) {
             ArrayList<Board> sol = new ArrayList<Board>();
-            for(int i = 0; i < size; i++) {
-                Board temp = new Board(size);
-                for(int iter = 0; iter < board.length; iter++)
-                    temp.board[iter] = board[iter].clone();
-                
-                temp.board[level][i] = true;
-                if(temp.isValid())
-                    sol.add(temp);
+            for(int i = 0; i < size; i++) {    
+                this.board[level][i] = true;
+                if(this.isValid()) {
+                  Board temp = new Board(size);
+                  for(int iter = 0; iter < board.length; iter++)
+                      temp.board[iter] = board[iter].clone();
+                  sol.add(temp);
+                }
+                this.board[level][i] = false;
             }
             return sol;
         }
