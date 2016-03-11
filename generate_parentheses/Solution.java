@@ -17,22 +17,19 @@ public class Solution {
 
         for(int i = 0; i < s.length(); i++) {
             char curchar = s.charAt(i);
-            if(match.containsKey(curchar))
+            if(curchar == '(')
                 st.push(curchar);
             else {
                 if(st.isEmpty())
                     return false;
-                if(match.get(st.pop()) != curchar)
+                if(st.pop() != '(')
                     return false;         
             }
         }
         if(s.length() < n)
             return true;
-        else {
-            if(st.isEmpty())
-                return true;
-            else
-                return false;
+        else { 
+            return st.isEmpty();
         }
     }
     
