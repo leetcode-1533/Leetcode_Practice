@@ -51,7 +51,10 @@ public class Solution {
                     return false;         
             }
         }
-        return true;
+        if(st.isEmpty())
+            return true;
+        else
+            return false;
     }
     
 
