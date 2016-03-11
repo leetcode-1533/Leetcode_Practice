@@ -24,7 +24,7 @@ public class Solution {
         }
         
         boolean isValid() {
-            
+            return (checkVert() && checkDiag1() && checkDiag2());          
         }
         
         boolean checkVert() {
@@ -45,9 +45,11 @@ public class Solution {
         boolean checkDiag1() {
             int sum = 0;
             for(sum = 0; sum < size; sum++) {
+                System.out.printf("sum: %d\n", sum);
                 boolean flip = false;
                 for(int i = 0; i <= sum; i++) {
                     int j = sum - i;
+                    System.out.printf("i: %d, j: %d\n", i, j);
                     if(board[i][j] == true) {
                         if(flip == false)
                             flip = true;
@@ -56,11 +58,14 @@ public class Solution {
                     }
                 }              
             }           
-            int MAXI = size - 1;
-            for(; sum < (size - 1) * 2; sum++) {
+            int MINI = 1;
+            for(; sum <= (size - 1) * 2; sum++) {
                 boolean flip = false;
-                for(int i = 1; i < MAXI; i++) {
+                System.out.printf("sum: %d\n", sum);
+                
+                for(int i = MINI; i < size; i++) {
                     int j = sum - i;
+                    System.out.printf("i: %d, j: %d\n", i, j);
                     if(board[i][j] == true) {
                         if(flip == false)
                             flip = true;
@@ -68,17 +73,19 @@ public class Solution {
                             return false;
                     }                  
                 }
-                MAXI--;
+                MINI++;
             }
             return true;
         }
         
         boolean checkDiag2() {
             for(int diff = 0; diff < size; diff++) {
+                System.out.printf("Diff: %d\n", diff);
                 boolean flip1 = false;
                 boolean flip2 = false;
                 for(int i = 0; i < (size - diff); i++) {
                     int j = i + diff;
+                    System.out.printf("i: %d, j: %d\n", i, j);
                     if(board[i][j] == true) {
                         if(flip1 == true)
                             return false;
@@ -100,8 +107,9 @@ public class Solution {
     }
     
     public void test() {
-        Board test = new Board(5);
-        System.out.println("test");
+        Board test = new Board(4);
+        test.checkDiag1();
+//        test.checkDiag2();
     }
     
     public List<List<String>> solveNQueens(int n) {
