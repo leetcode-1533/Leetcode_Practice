@@ -12,6 +12,23 @@ public class Solution {
             board = new boolean[n][n];
         }
         
+        ArrayList<String> board2str() {
+            ArrayList<String> re = new ArrayList<String>(board.length);
+            
+            for(int i = 0; i < board.length; i++) {
+                StringBuilder temp = new StringBuilder();
+                for(int j = 0; j < board.length; j++) {
+                    if(board[i][j])
+                        temp.append('Q');
+                    else
+                        temp.append('.');                     
+                }
+                re.add(temp.toString());              
+            }
+            
+            return re;
+        }
+        
         ArrayList<Board> perm(int level) {
             ArrayList<Board> sol = new ArrayList<Board>();
             for(int i = 0; i < size; i++) {
@@ -109,25 +126,32 @@ public class Solution {
         }       
     }
     
-    private void solveNqueens(int level, int n, Board gene, ArrayList<Board> container) {
+    private void solveNqueens(int level, int n, Board gene, ArrayList<List<String>> container) {
         if(n == level)
-            container.add(gene);
+            container.add(gene.board2str());
         else {
             for(Board item : gene.perm(level))
                 solveNqueens(level + 1, n, item, container);           
         }        
     }
     
-    public int totalNQueens(int n) {
-        ArrayList<Board> re = new ArrayList<Board>();
+//    public int totalNQueens(int n) {
+//        ArrayList<Board> re = new ArrayList<Board>();
+//        Board board = new Board(n);
+//        solveNqueens(0, n, board, re);
+//        return re.size();
+//    }
+    
+    public List<List<String>> solveNQueens(int n) {
+        ArrayList<List<String>> re = new ArrayList<List<String>>();
         Board board = new Board(n);
         solveNqueens(0, n, board, re);
-        return re.size();
+        return re;       
     }
     
     public static void main(String[] args) {
         Solution sol = new Solution();
-//        System.out.println(sol.totalNQueens(4));
+        System.out.println(sol.solveNQueens(9).size());
     }
 
 }
