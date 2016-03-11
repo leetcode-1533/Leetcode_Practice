@@ -13,7 +13,7 @@ public class Solution {
     }};
     
     
-    protected int[] romanToArray(String s) {
+    private int[] romanToArray(String s) {
         int[] array = new int[s.length()];
         for(int i = 0; i < s.length(); i++) {
             array[i] = map.get(s.charAt(i));
@@ -21,18 +21,26 @@ public class Solution {
         return array;
     }
     public int romanToInt(String s) {
-//        return romanToArray(s);
-        
+        int[] array = romanToArray(s);
+        if(s == null) {
+            return 0;
+        }
+        int sum = array[0];
+
+        for(int i = 1; i < array.length; i++) {
+            sum += array[i];
+            if(array[i] > array[i - 1]) {
+                sum -= 2 * array[i - 1];               
+            }
+        }
+        return sum;
     }
 
     
     public static void main(String[] args) {
         Solution sol = new Solution();
-        int[] test = sol.romanToArray("MXCVI");
-        
-       for(int item : test) {
-           StdOut.printf("\t %d",item);
-       }
+        StdOut.println(sol.romanToInt("MXCVI"));
+
     }
 
 }
