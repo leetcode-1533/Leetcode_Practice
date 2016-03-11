@@ -9,7 +9,7 @@ public class Solution {
     
     public void push(int x) {
         container.push(x);
-        if(min.empty() || min.peek() > x) {
+        if(min.empty() || min.peek() >=x) {
             min.push(x);
         }
     }
