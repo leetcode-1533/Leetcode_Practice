@@ -43,11 +43,38 @@ public class Solution {
         }
         
         boolean checkDiag1() {
-            
+            int sum = 0;
+            for(sum = 0; sum < size; sum++) {
+                boolean flip = false;
+                for(int i = 0; i <= sum; i++) {
+                    int j = sum - i;
+                    if(board[i][j] == true) {
+                        if(flip == false)
+                            flip = true;
+                        else 
+                            return false;
+                    }
+                }              
+            }           
+            int MAXI = size - 1;
+            for(; sum < (size - 1) * 2; sum++) {
+                boolean flip = false;
+                for(int i = 1; i < MAXI; i++) {
+                    int j = sum - i;
+                    if(board[i][j] == true) {
+                        if(flip == false)
+                            flip = true;
+                        else
+                            return false;
+                    }                  
+                }
+                MAXI--;
+            }
+            return true;
         }
         
         boolean checkDiag2() {
-            for(int diff = 1; diff < size; diff++) {
+            for(int diff = 0; diff < size; diff++) {
                 boolean flip1 = false;
                 boolean flip2 = false;
                 for(int i = 0; i < (size - diff); i++) {
@@ -58,12 +85,14 @@ public class Solution {
                         else
                             flip1 = true;
                     }
-                    if(board[j][i] == true) {
-                        if(flip2 == true)
-                            return false;
-                        else
-                            flip2 = true;
-                    }                   
+                    if(diff != 0 ) {
+                        if(board[j][i] == true) {
+                            if(flip2 == true)
+                                return false;
+                            else
+                                flip2 = true;
+                        }    
+                    }               
                 }             
             }
             return true;           
