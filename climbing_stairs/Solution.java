@@ -6,31 +6,24 @@ import java.util.concurrent.ArrayBlockingQueue;
  */
 public class Solution {
     public int climbStairs(int n) {
-        if (n <= 2) {
-            int[] ans = new int[]{1, 2};
-            return ans[n - 1];
-        } else {
-            ArrayBlockingQueue<Integer> que = new ArrayBlockingQueue<Integer>(3);
-            que.add(1);
-            que.add(2);
+        int counter = 2;
 
-            int counter = 2;
-            int ans = 0;
-            while (counter != n) {
-                ans = 0;
-                for(Integer item : que) {
-                    ans += item;
-                }
-                que.poll();
-                que.add(ans);
+        int[] cal = new int[]{1, 2};
+        if (n <= counter) {
+            return cal[n - 1];
+        } else {
+            while( counter !=n ) {
+                int temp = cal[1];
+                cal[1] = cal[0] + cal[1];
+                cal[0] = temp;
                 counter++;
             }
-            return ans;
         }
+        return cal[1];
     }
 
     public static void main(String[] args) {
         Solution sol = new Solution();
-        System.out.println(sol.climbStairs(1));
+        System.out.println(sol.climbStairs(4));
     }
 }
