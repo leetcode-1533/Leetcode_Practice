@@ -31,17 +31,39 @@ public class Solution {
     /*
     Top down method V2: without memorization
      */
+//    public int uniquePaths(int m, int n) {
+//        if (m < 0 || n < 0) {
+//            return 0;
+//        }
+//
+//        if (m == 1 && n == 1) {
+//            return 1;
+//        }
+//        return uniquePaths(m - 1, n) + uniquePaths(m, n - 1);
+//
+//    }
+    /*
+    Top Down method: V3: Using memorization
+     */
+    public int calPaths(int i, int j, int mat[][]) {
+        if (i == 0 || j == 0)
+            return 0;
+        if (mat[i][j] == -1) {
+            mat[i][j] = calPaths(i - 1, j, mat) + calPaths(i, j - 1, mat);
+        }
+        return mat[i][j];
+    }
 
     public int uniquePaths(int m, int n) {
-        if (m < 0 || n < 0) {
-            return 0;
+        int[][] ans = new int[m + 1][n + 1];
+        for (int i = 1; i < m + 1; i++) {
+            for (int j = 1; j < n + 1; j++) {
+                ans[i][j] = -1; //Unreached
+            }
         }
+        ans[1][1] = 1;
 
-        if (m == 1 && n == 1) {
-            return 1;
-        }
-        return uniquePaths(m - 1, n) + uniquePaths(m, n - 1);
-
+        return calPaths(m, n, ans);
     }
 
     public static void main(String[] args) {
