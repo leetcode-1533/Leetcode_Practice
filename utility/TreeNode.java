@@ -1,4 +1,4 @@
-Package util;
+package utility;
 
 import java.util.ArrayDeque;
 import java.util.Queue;
@@ -53,4 +53,3 @@ public class TreeNode {
         tree.print();
     }
 }
-

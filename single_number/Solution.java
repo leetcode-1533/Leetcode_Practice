@@ -27,7 +27,6 @@ public class Solution {
         Iterator<Integer> temp = map.iterator();
         
         return temp.next();
-        
   
     }
     
