@@ -6,15 +6,22 @@ import utility.TreeNode;
  */
 public class Solution {
     public int minDepth(TreeNode root) {
-        return getMinDepth(root, 0);
+        if(root == null)
+            return 0;
+        else
+          return getMinDepth(root, 1);
     }
 
     private int getMinDepth(TreeNode node, int curDepth) {
-        if(node == null)
+        if(node.left == null && node.right == null)
             return curDepth;
-        else {
-            return Math.min(getMinDepth(node.left, curDepth + 1), getMinDepth(node.right, curDepth + 1));
+        if(node.left == null || node.right == null) {
+            if(node.left == null)
+                return getMinDepth(node.right, curDepth + 1);
+            else
+                return getMinDepth(node.left, curDepth + 1);
         }
+        return Math.min(getMinDepth(node.left, curDepth + 1), getMinDepth(node.right, curDepth + 1));
     }
 
     public static void main(String[] args) {
