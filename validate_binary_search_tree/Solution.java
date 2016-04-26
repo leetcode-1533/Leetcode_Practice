@@ -6,16 +6,20 @@ import utility.TreeNode;
  */
 public class Solution {
     public boolean isValidBST(TreeNode root) {
-        if (root == null || (root.left == null && root.right == null))
-            return true;
+        return (root == null || isvalid(root, Integer.MIN_VALUE, Integer.MAX_VALUE));
+    }
+
+    private boolean isvalid(TreeNode root, int largert, int smallert) {
+        if (root.left == null && root.right == null)
+            return (root.val > largert && root.val < smallert);
         else if (root.left != null && root.right == null)
-            return (root.val > root.left.val && isValidBST(root.left));
+            return (root.val > largert && root.val < smallert && isvalid(root.left, largert, root.val));
         else if (root.left == null && root.right != null)
-            return (root.val < root.right.val && isValidBST(root.right));
+            return (root.val > largert && root.val < smallert && isvalid(root.right, root.val, smallert));
         else
-            return (root.val < root.right.val && root.val > root.left.val
-                    && isValidBST(root.left)
-                    && isValidBST(root.right));
+            return (root.val > largert && root.val < smallert
+                    && isvalid(root.left, largert, root.val)
+                    && isvalid(root.right, root.val, smallert));
     }
 
     public static void main(String[] args) {
