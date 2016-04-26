@@ -10,16 +10,14 @@ public class Solution {
     }
 
     private boolean isvalid(TreeNode root, int largert, int smallert) {
-        if (root.left == null && root.right == null)
-            return (root.val > largert && root.val < smallert);
-        else if (root.left != null && root.right == null)
-            return (root.val > largert && root.val < smallert && isvalid(root.left, largert, root.val));
-        else if (root.left == null && root.right != null)
-            return (root.val > largert && root.val < smallert && isvalid(root.right, root.val, smallert));
-        else
-            return (root.val > largert && root.val < smallert
-                    && isvalid(root.left, largert, root.val)
-                    && isvalid(root.right, root.val, smallert));
+        boolean lt = true;
+        boolean rt = true;
+        boolean ist = root.val > largert && root.val < smallert;
+        if(ist && root.left != null)
+            lt = isvalid(root.left, largert, root.val);
+        if(ist && lt && root.right != null)
+            rt = isvalid(root.right, root.val, smallert);
+        return ist && lt && rt;
     }
 
     public static void main(String[] args) {
