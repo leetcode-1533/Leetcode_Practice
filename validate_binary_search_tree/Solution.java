@@ -6,22 +6,28 @@ import utility.TreeNode;
  */
 public class Solution {
     public boolean isValidBST(TreeNode root) {
-        return (root == null || isvalid(root, Integer.MIN_VALUE, Integer.MAX_VALUE));
+        return (root == null || isvalid(root, null, null));
     }
 
-    private boolean isvalid(TreeNode root, int largert, int smallert) {
+    private boolean isvalid(TreeNode root, Integer largert, Integer smallert) {
         boolean lt = true;
         boolean rt = true;
-        boolean ist = root.val > largert && root.val < smallert;
+        boolean ist = true;
+        if(largert != null)
+            ist = root.val > largert;
+        if(smallert != null)
+            ist = ist && root.val < smallert;
+
         if(ist && root.left != null)
             lt = isvalid(root.left, largert, root.val);
         if(ist && lt && root.right != null)
             rt = isvalid(root.right, root.val, smallert);
+
         return ist && lt && rt;
     }
 
     public static void main(String[] args) {
-        TreeNode tree1 = TreeNode.build(new Integer[] {10,5,15,null,null,6,20});
+        TreeNode tree1 = TreeNode.build(new Integer[] {Integer.MAX_VALUE});
         Solution sol = new Solution();
         System.out.println(sol.isValidBST(tree1));
     }
