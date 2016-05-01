@@ -17,7 +17,7 @@ public class Solution {
             return 0;
         if (node.left != null)
             cur_dl = depthof(node.left);
-        if (node.right != null)
+        if (cur_dl != -1 && node.right != null)
             cur_dr = depthof(node.right);
 
         if (cur_dr == -1 || cur_dl == -1 || Math.abs(cur_dl - cur_dr) > 1)
