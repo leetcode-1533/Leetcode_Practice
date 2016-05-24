@@ -15,28 +15,20 @@ public class Solution {
         for (int i = 0; i < Math.pow(2, N); i++) {
             boolean[] mode = Solution.toBinary(i, N);
 
-            Character[] ori = new Character[N];
-            for (int j = 0; j < N; j++) { // string into character array
-                if (mode[j])
-                    ori[j] = new Character(word.charAt(j));
-                else
-                    ori[j] = null;
-            }
-
             StringBuilder result = new StringBuilder();
 
             for (int j = 0; j < N; j++) {
-                if (ori[j] == null) {
+                if (!mode[j]) {
                     int numofnull = 0;
-                    while (j < N && ori[j] == null) {
+                    while (j < N && !mode[j]) {
                         numofnull++;
                         j++;
                     }
-                    j--;
+                    j--; // over heading
                     result.append(numofnull);
                 }
                 else
-                    result.append(ori[j].charValue());
+                    result.append(word.charAt(j));
             }
             ans.add(result.toString());
         }
