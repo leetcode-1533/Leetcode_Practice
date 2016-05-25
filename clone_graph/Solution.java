@@ -39,13 +39,13 @@ public class Solution {
 //        return newNodeMap.get(node.label);
 //    }
 
-//    public UndirectedGraphNode cloneGraph(UndirectedGraphNode node) {
-//        if (node == null)
-//            return null;
-//
-//        HashMap<UndirectedGraphNode, UndirectedGraphNode> set = new HashMap<>();
-//        return dfs2(node, set);
-//    }
+    public UndirectedGraphNode cloneGraph(UndirectedGraphNode node) {
+        if (node == null)
+            return null;
+
+        HashMap<UndirectedGraphNode, UndirectedGraphNode> set = new HashMap<>();
+        return dfs2(node, set);
+    }
 
     private void dfs(UndirectedGraphNode Node, HashMap<Integer, ArrayList<Integer>> set) {
         if (!set.containsKey(Node.label)) {
@@ -78,18 +78,22 @@ public class Solution {
     /*
     BFS Version
      */
-    public UndirectedGraphNode cloneGraph(UndirectedGraphNode node) {
+    public UndirectedGraphNode bfscloneGraph(UndirectedGraphNode node) {
         if (node == null)
             return null;
 
         Queue<UndirectedGraphNode> bfsqueue = new ArrayDeque<>();
         bfsqueue.add(node);
         HashMap<UndirectedGraphNode, UndirectedGraphNode> map = new HashMap<>();
+        UndirectedGraphNode ans = new UndirectedGraphNode(node.label);
+        map.put(node, ans);
 
         while (!bfsqueue.isEmpty()) {
             UndirectedGraphNode queue_node = bfsqueue.poll();
-            UndirectedGraphNode clone_node = new UndirectedGraphNode(queue_node.label);
-            map.put(queue_node, clone_node);
+
+//            UndirectedGraphNode clone_node = new UndirectedGraphNode(queue_node.label);
+//            map.put(queue_node, clone_node);
+            UndirectedGraphNode clone_node = map.get(queue_node);
 
             for (UndirectedGraphNode nei_node : queue_node.neighbors) {
                 if (map.containsKey(nei_node))
@@ -111,14 +115,23 @@ public class Solution {
     public static void main(String[] args) {
         Solution sol = new Solution();
 
-        UndirectedGraphNode test = new UndirectedGraphNode(0);
-        test.neighbors.add(test);
-        test.neighbors.add(test);
+        UndirectedGraphNode nei0 = new UndirectedGraphNode(0);
+        UndirectedGraphNode nei1 = new UndirectedGraphNode(1);
+        UndirectedGraphNode nei2 = new UndirectedGraphNode(2);
 
 
-        UndirectedGraphNode res = sol.cloneGraph(test);
+        nei0.neighbors.add(nei1);
+        nei1.neighbors.add(nei0);
 
-        StdOut.println(UndirectedGraphNode.isSameGraph(test, res));
+        nei1.neighbors.add(nei2);
+        nei2.neighbors.add(nei1);
+
+        nei2.neighbors.add(nei2);
+
+
+        UndirectedGraphNode res = sol.bfscloneGraph(nei0);
+
+        StdOut.println(UndirectedGraphNode.isSameGraph(nei0, res));
 
 
     }
