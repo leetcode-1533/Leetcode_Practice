@@ -14,6 +14,8 @@ import edu.princeton.cs.algs4.StdOut;
 import utility.UndirectedGraphNode;
 import java.util.HashMap;
 import java.util.ArrayList;
+import java.util.Queue;
+import java.util.ArrayDeque;
 
 public class Solution {
 //    public UndirectedGraphNode cloneGraph(UndirectedGraphNode node) {
@@ -37,13 +39,13 @@ public class Solution {
 //        return newNodeMap.get(node.label);
 //    }
 
-    public UndirectedGraphNode cloneGraph(UndirectedGraphNode node) {
-        if (node == null)
-            return null;
-
-        HashMap<UndirectedGraphNode, UndirectedGraphNode> set = new HashMap<>();
-        return dfs2(node, set);
-    }
+//    public UndirectedGraphNode cloneGraph(UndirectedGraphNode node) {
+//        if (node == null)
+//            return null;
+//
+//        HashMap<UndirectedGraphNode, UndirectedGraphNode> set = new HashMap<>();
+//        return dfs2(node, set);
+//    }
 
     private void dfs(UndirectedGraphNode Node, HashMap<Integer, ArrayList<Integer>> set) {
         if (!set.containsKey(Node.label)) {
@@ -71,6 +73,39 @@ public class Solution {
         } else {
             return set.get(Node);
         }
+    }
+
+    /*
+    BFS Version
+     */
+    public UndirectedGraphNode cloneGraph(UndirectedGraphNode node) {
+        if (node == null)
+            return null;
+
+        Queue<UndirectedGraphNode> bfsqueue = new ArrayDeque<>();
+        bfsqueue.add(node);
+        HashMap<UndirectedGraphNode, UndirectedGraphNode> map = new HashMap<>();
+
+        while (!bfsqueue.isEmpty()) {
+            UndirectedGraphNode queue_node = bfsqueue.poll();
+            UndirectedGraphNode clone_node = new UndirectedGraphNode(queue_node.label);
+            map.put(queue_node, clone_node);
+
+            for (UndirectedGraphNode nei_node : queue_node.neighbors) {
+                if (map.containsKey(nei_node))
+                    clone_node.neighbors.add(map.get(nei_node));
+                else {
+                    bfsqueue.add(nei_node);
+
+                    UndirectedGraphNode clone_neigh = new UndirectedGraphNode(nei_node.label);
+                    map.put(nei_node, clone_neigh);
+
+                    clone_node.neighbors.add(clone_neigh);
+                }
+            }
+        }
+
+        return map.get(node);
     }
 
     public static void main(String[] args) {
