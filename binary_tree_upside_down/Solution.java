@@ -9,7 +9,10 @@ public class Solution {
     public TreeNode upsideDownBinaryTree(TreeNode root) {
         if (root == null || root.left == null)
             return root;
-        return dfs(root);
+        TreeNode ans = dfs(root);
+        root.left = null;
+        root.right = null;
+        return ans;
     }
 
     private TreeNode dfs(TreeNode pnode) {
@@ -32,6 +35,8 @@ public class Solution {
         TreeNode tree = TreeNode.build(new Integer[] {1,2,3,4,5});
         Solution sol = new Solution();
         TreeNode ans = sol.upsideDownBinaryTree(tree);
+
+
         ans.print();
 
 
