@@ -2,6 +2,9 @@ package binary_tree_upside_down;
 
 /**
  * Created by y1275963 on 5/26/16.
+ *
+ * p.left = parent.right;
+ * p.right = parent;
  */
 import utility.TreeNode;
 
