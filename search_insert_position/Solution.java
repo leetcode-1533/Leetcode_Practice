@@ -65,7 +65,7 @@ public class Solution {
 
         int[] nums = new int[] {1, 2, 3};
         Solution sol = new Solution();
-        int target = 4;
+        int target = -100;
         System.out.println(sol.searchInsert(nums, target));
         System.out.println(sol.iterative(nums, target));
 
