@@ -13,9 +13,27 @@ public class Solution {
             else
                 return 1;
         }
-
-
         return binarySearch(nums, 0, nums.length - 1, target);
+    }
+
+    private int iterative(int[] nums, int target) {
+        int lo = 0;
+        int hi = nums.length - 1;
+        int mid = (lo + hi) / 2;
+
+        while (hi > lo) {
+            if (nums[mid] == target)
+                return mid;
+            else if (nums[mid] > target)
+                hi = mid - 1;
+            else
+                lo = mid + 1;
+        }
+        if (target > nums[lo])
+            return lo + 1;
+        else
+            return lo;
+
     }
 
     private int binarySearch(int[] nums, int lo, int hi, int target) {
@@ -37,15 +55,19 @@ public class Solution {
         }
     }
 
+
+
     public static void main(String[] args) {
         int a = 3;
         int b = 2;
         int midab =  (int) Math.ceil((double) a/b);
 //        System.out.println(midab);
 
-        int[] nums = new int[] {1, 3};
+        int[] nums = new int[] {1, 2, 3};
         Solution sol = new Solution();
-        int target = 1;
+        int target = 4;
         System.out.println(sol.searchInsert(nums, target));
+        System.out.println(sol.iterative(nums, target));
+
     }
 }
