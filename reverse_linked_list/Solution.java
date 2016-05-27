@@ -22,7 +22,7 @@ public class Solution {
         ListNode root;
         if (p.next.next != null)
             root = recursive(p.next);
-        else 
+        else
             root = p.next;
 
         reverse(p, p.next);
@@ -33,14 +33,36 @@ public class Solution {
         if (head == null || head.next == null)
             return head;
         else
-            return recursive(head);
+            return iterative(head);
 
+    }
+
+    private ListNode iterative(ListNode p) {
+        ListNode p0 = p;
+        ListNode p1 = p.next;
+        ListNode p2 = p.next.next;
+        p0.next = null;
+
+        while (true) {
+            p1.next = p0;
+
+            // update
+            if (p2 == null)
+                return p1;
+            else {
+                p0 = p1;
+                p1 = p2;
+                p2 = p2.next;
+            }
+        }
     }
 
 
 
+
+
     public static void main(String[] args) {
-        ListNode test = ListNode.getList3();
+        ListNode test = ListNode.constructLinkedList(new int[] {1, 2, 3, 4, 5});
         System.out.println(test);
 
         Solution sol = new Solution();
