@@ -38,21 +38,20 @@ public class Solution {
     }
 
     private ListNode iterative(ListNode p) {
-        ListNode p0 = p;
-        ListNode p1 = p.next;
-        ListNode p2 = p.next.next;
-        p0.next = null;
+        ListNode prev = null;
+        ListNode curr = p;
+        ListNode next = curr.next;
 
         while (true) {
-            p1.next = p0;
+            curr.next = prev;
 
             // update
-            if (p2 == null)
-                return p1;
+            if (next == null)
+                return curr;
             else {
-                p0 = p1;
-                p1 = p2;
-                p2 = p2.next;
+                prev = curr;
+                curr = next;
+                next = next.next;
             }
         }
     }
