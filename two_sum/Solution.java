@@ -15,7 +15,7 @@ public class Solution {
             if (table.containsKey(candidate) && table.get(candidate) != i)
                 return new int[] {i, table.get(candidate)};
         }
-        return null; // never reach, contain exactly one solution
+        throw new IllegalArgumentException("No two sum solution");
     }
 
     public static void main(String[] args) {
