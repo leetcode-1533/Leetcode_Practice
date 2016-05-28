@@ -17,13 +17,16 @@ public class Solution {
                 lo = mid;
             else if (nums[mid] < nums[hi])
                 hi = mid;
+            else {
+                lo = lo + 1;
+            }
         }
-        return nums[hi];
+        return Math.min(nums[lo], nums[hi]);
     }
 
     public static void main(String[] args) {
         Solution sol = new Solution();
 //        System.out.println(sol.findMin(new int[] {4,5,6,7,0,1,2}));
-        System.out.println(sol.findMin(new int[] {1, 2}));
+        System.out.println(sol.findMin(new int[] {1, 3}));
     }
 }
