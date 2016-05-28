@@ -20,8 +20,8 @@ public class TwoSum {
     public boolean find(int value) {
         for (int item : container.keySet()) {
             int x = value - item;
-            if (x == item)
-                return (container.containsKey(item) && container.get(item) >= 2);
+            if (x == item && container.containsKey(item) && container.get(item) >= 2)
+                return true;
             else if (container.containsKey(x))
                 return true;
         }
@@ -34,7 +34,7 @@ public class TwoSum {
         twoSum.add(0);
         twoSum.add(-1);
 
-        System.out.println(twoSum.find(1));
+        System.out.println(twoSum.find(0));
     }
 }
 
