@@ -1,7 +1,9 @@
 package two_sum_iii_data_structure_design;
 
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.HashMap;
+
 public class TwoSum {
     private Map<Integer, Integer> container;
 
@@ -18,10 +20,14 @@ public class TwoSum {
 
     // Find if there exists any pair of numbers which sum is equal to the value.
     public boolean find(int value) {
-        for (int item : container.keySet()) {
+        for (Entry<Integer, Integer> entry : container.entrySet()) {
+            int item = entry.getKey();
             int x = value - item;
-            if (x == item && container.containsKey(item) && container.get(item) >= 2)
-                return true;
+
+            if (x == item) {
+                if (entry.getValue() >= 2)
+                    return true;
+            }
             else if (container.containsKey(x))
                 return true;
         }
@@ -30,9 +36,7 @@ public class TwoSum {
 
     public static void main(String[] args) {
         TwoSum twoSum = new TwoSum();
-        twoSum.add(1);
         twoSum.add(0);
-        twoSum.add(-1);
 
         System.out.println(twoSum.find(0));
     }
