@@ -22,7 +22,7 @@ public class TwoSum {
             int x = value - item;
             if (x == item)
                 return (container.containsKey(item) && container.get(item) >= 2);
-            else if (container.containsKey(item))
+            else if (container.containsKey(x))
                 return true;
         }
         return false;
@@ -31,7 +31,10 @@ public class TwoSum {
     public static void main(String[] args) {
         TwoSum twoSum = new TwoSum();
         twoSum.add(1);
-        twoSum.find(50);
+        twoSum.add(0);
+        twoSum.add(-1);
+
+        System.out.println(twoSum.find(1));
     }
 }
 
