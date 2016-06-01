@@ -17,8 +17,8 @@ public class Solution {
             i = nextPos(i, '>', s);
             j = nextPos(j, '<', s);
         }
-        if (i > j)
-            return false; // in case of over run;
+//        if (i > j)
+//            return true; // in case of over run;
 
         return sameChar(i, j, s); // odd or even
     }
@@ -59,7 +59,7 @@ public class Solution {
 
     public static void main(String[] args) {
         Solution sol = new Solution();
-        System.out.println(sol.isPalindrome("aA"));
+        System.out.println(sol.isPalindrome("            abc **c BA    "));
 //        System.out.println(Character.isLetterOrDigit(' '));
     }
 }
