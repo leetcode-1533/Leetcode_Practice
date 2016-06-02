@@ -13,7 +13,6 @@ package string_to_integer_atoi;
  You are responsible to gather all the input requirements up front.
 
  */
-import java.math.BigInteger;
 
 public class Solution {
     public int myAtoi(String str) {
@@ -37,23 +36,21 @@ public class Solution {
         while (endp < trimstr.length() && Character.isDigit(trimstr.charAt(endp))) endp++;
 
 
-        BigInteger re = BigInteger.valueOf(0);
-        BigInteger power = BigInteger.valueOf(10);
+        long re = 0;
 
         for (int i = 0; i < endp; i++) {
             int val = Character.getNumericValue(trimstr.charAt(i));
+            if (isNegative)
+                val = -val;
 
-            re = re.add(power.pow(endp - 1 - i).multiply(BigInteger.valueOf(val)));
+            re += val * Math.pow(10, endp - 1 - i) ;
 
-            if (re.bitLength() > 32) {// 2147483647
-                if (isNegative)
-                    return Integer.MIN_VALUE;
-                else
-                    return Integer.MAX_VALUE;
-            }
-
+            if (re < Integer.MIN_VALUE)
+                return Integer.MIN_VALUE;
+            if (re > Integer.MAX_VALUE)
+                return Integer.MAX_VALUE;
         }
-        return isNegative ? -re.intValue() : re.intValue();
+        return (int) re;
     }
 
     public static void main(String[] args) {
@@ -71,7 +68,7 @@ public class Solution {
         test1 = Integer.toString(Integer.MAX_VALUE);
         System.out.println(sol.myAtoi(test1));
 
-        test1 = "2147483648";
+        test1 = "-2147483649";
         System.out.println(sol.myAtoi(test1));
 
 
