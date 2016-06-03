@@ -20,10 +20,25 @@ public class Solution {
 
         int endp = validfloat(trimstr, false);
 
-        if (trimstr.length() == endp && Character.isDigit(trimstr.charAt(endp - 1)))
-            return true;
-        else
+        if (endp == -1)
             return false;
+        if (trimstr.length() == endp) {
+            if (Character.isDigit(trimstr.charAt(endp - 1)) || (trimstr.charAt(endp - 1) == '.' && (endp - 1) != 0)) // for case like 1. is right and . is wrong
+                return true;
+            else
+                return false;
+        }
+        else {
+            if (endp == 0)
+                return false; // for cases starting with e, like e10
+            char lastchar = trimstr.charAt(endp);
+            if (lastchar == 'e') {
+                return validint(trimstr.substring(endp + 1));
+            }
+            else
+                return false;
+        }
+
     }
 
     private int validfloat(String trimstr, boolean previousdot) {
@@ -31,16 +46,25 @@ public class Solution {
         while (endp < trimstr.length() && Character.isDigit(trimstr.charAt(endp))) endp++;
         if (endp == trimstr.length() || trimstr.charAt(endp) == 'e')
             return endp;
-        else if (trimstr.charAt(endp) == '.' && !previousdot)
-            return 1+ endp + validfloat(trimstr.substring(endp + 1), true);
+        else if (trimstr.charAt(endp) == '.' && !previousdot) {
+            int re = validfloat(trimstr.substring(endp + 1), true);
+            return re != -1 ? 1 + endp + re : -1;
+        }
         else
             return -1;
     }
 
+    private boolean validint(String trimstr) {
+        if (trimstr.length() <= 0)
+            return false;
+        int endp = 0;
+        while (endp < trimstr.length() && Character.isDigit(trimstr.charAt(endp))) endp++;
+        return trimstr.length() == endp;
+    }
+
     public static void main(String[] args) {
         Solution sol = new Solution();
-
-        sol.isNumber(".");
+        sol.isNumber(".e1");
 
         ArrayList<String> testSet = new ArrayList<>();
         testSet.add("");
@@ -54,30 +78,29 @@ public class Solution {
         for (String item : testSet)
             System.out.printf("%s %b\n", item, sol.isNumber(item));
 
-        System.out.println();
+        System.out.println("Non-numerical Numbers");
         testSet.clear();
         testSet.add("abc");
+        testSet.add("1a");
+        testSet.add("a1");
+        testSet.add("1e");
         testSet.add(" 1.3");
         for (String item : testSet)
             System.out.printf("%s %b\n", item, sol.isNumber(item));
 
+        System.out.println("Exponential Numbers");
+        testSet.clear();
+        testSet.add("123e1");
+        testSet.add("123e");
+        testSet.add("e1");
+        testSet.add("1e");
+        testSet.add("122.e1");
+        testSet.add("1.0e1");
+        testSet.add(".e1");
 
 
-//        test = " 0.1 ";
-//        System.out.println(test);
-//        System.out.println(sol.isNumber(test));
-//
-//        test = "abc";
-//        System.out.println(test);
-//        System.out.println(sol.isNumber(test));
-//
-//        test = "1 a";
-//        System.out.println(test);
-//        System.out.println(sol.isNumber(test));
-//
-//        test = "2e10";
-//        System.out.println(test);
-//        System.out.println(sol.isNumber(test));
+        for (String item : testSet)
+            System.out.printf("%s %b\n", item, sol.isNumber(item));
 
     }
 }
