@@ -33,10 +33,12 @@ public class MedianFinder {
     }
 
     private void balance() {
-        if (upperbound.size() > lowerbound.size())
-            lowerbound.add(upperbound.poll());
-        else if (upperbound.size() < lowerbound.size())
-            upperbound.add(lowerbound.poll());
+        if (Math.abs(upperbound.size() - lowerbound.size()) >= 2) {
+            if (upperbound.size() > lowerbound.size())
+                lowerbound.add(upperbound.poll());
+            else if (upperbound.size() < lowerbound.size())
+                upperbound.add(lowerbound.poll());
+        }
     }
 
     // Returns the median of current data stream
