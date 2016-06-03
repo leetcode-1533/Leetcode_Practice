@@ -6,7 +6,7 @@ package find_median_from_data_stream;
 
 import java.util.Comparator;
 import java.util.PriorityQueue;
-public class Solution {
+public class MedianFinder {
     private static final int INITIALSIZE = 10;
 
     private class reverseIntComparator implements Comparator<Integer> {
@@ -16,34 +16,27 @@ public class Solution {
         }
     }
 
-    PriorityQueue<Integer> lowerbound = new PriorityQueue<>(INITIALSIZE, new reverseIntComparator());
-    PriorityQueue<Integer> upperbound = new PriorityQueue<>(INITIALSIZE);
+    private PriorityQueue<Integer> upperbound = new PriorityQueue<>(INITIALSIZE, new reverseIntComparator());
+    private PriorityQueue<Integer> lowerbound = new PriorityQueue<>(INITIALSIZE);
 
     // Adds a number into the data structure.
     public void addNum(int num) {
-        if (lowerbound.size() == 0 && upperbound.size() == 0)
-            lowerbound.add(num);
-        else if (lowerbound.size() == 0) {
-            if (num > upperbound.peek())
-                lowerbound.add(num);
-            else
-                upperbound.add(num);
-        } else if (upperbound.size() == 0) {
-            if (num < lowerbound.peek())
+        if (upperbound.size() == 0)
+            upperbound.add(num);
+        else {
+            if (num < upperbound.peek())
                 upperbound.add(num);
             else
                 lowerbound.add(num);
-        } else {
-            if (num > upperbound.peek() && num < lowerbound.peek()) {
-                if (upperbound.size() > lowerbound.size())
-                    lowerbound.add(num);
-                else
-                    upperbound.add(num);
-            } else if (num < upperbound.size())
-                upperbound.add(num);
-            else
-                lowerbound.add(num);
+            balance();
         }
+    }
+
+    private void balance() {
+        if (upperbound.size() > lowerbound.size())
+            lowerbound.add(upperbound.poll());
+        else if (upperbound.size() < lowerbound.size())
+            upperbound.add(lowerbound.poll());
     }
 
     // Returns the median of current data stream
@@ -63,7 +56,7 @@ public class Solution {
     }
 
     public static void main(String[] args) {
-        Solution sol = new Solution();
+        MedianFinder sol = new MedianFinder();
 //        sol.upperbound.add(1);
 //        sol.upperbound.add(5);
 //        sol.upperbound.add(2);
@@ -75,10 +68,9 @@ public class Solution {
 //        sol.lowerbound.add(2);
 //
 //        System.out.println(sol.lowerbound.peek());
-        sol.addNum(1);
-        sol.addNum(2);
-        sol.addNum(3);
-
+        int[] testSet = new int[] {1, 2};
+        for (int item : testSet)
+            sol.addNum(item);
 
         System.out.println(sol.findMedian());
 
