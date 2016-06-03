@@ -31,6 +31,9 @@ public class Solution {
         else {
             if (endp == 0)
                 return false; // for cases starting with e, like e10
+            if (!isNumber(trimstr.substring(0, endp)))
+                return false;
+
             char lastchar = trimstr.charAt(endp);
             if (lastchar == 'e') {
                 return validint(trimstr.substring(endp + 1));
@@ -57,6 +60,10 @@ public class Solution {
     private boolean validint(String trimstr) {
         if (trimstr.length() <= 0)
             return false;
+        if (trimstr.charAt(0) == '+' || trimstr.charAt(0) == '-')
+            trimstr = trimstr.substring(1);
+        if (trimstr.length() <= 0)
+            return false;
         int endp = 0;
         while (endp < trimstr.length() && Character.isDigit(trimstr.charAt(endp))) endp++;
         return trimstr.length() == endp;
@@ -64,7 +71,7 @@ public class Solution {
 
     public static void main(String[] args) {
         Solution sol = new Solution();
-        sol.isNumber(".e1");
+        sol.isNumber("2e0");
 
         ArrayList<String> testSet = new ArrayList<>();
         testSet.add("");
@@ -97,6 +104,11 @@ public class Solution {
         testSet.add("122.e1");
         testSet.add("1.0e1");
         testSet.add(".e1");
+        testSet.add("2e0");
+        testSet.add("005047e+6");
+        testSet.add("005047e+");
+
+
 
 
         for (String item : testSet)
