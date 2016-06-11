@@ -21,12 +21,28 @@ public class Solution {
     private int longestPalindrome_len(String s) {
         String rev_s = new StringBuilder(s).reverse().toString();
         construct_dist(s, rev_s);
-        int i = 0, j = 0, max = 0;
-        for (i = 1; i < dist.length; i++) {
-            for (j = 1; j < dist[0].length; j++)
-                max = max < dist[i][j] ? dist[i][j] : max;
+
+        for (int i = 1; i < dist.length; i++) {
+            for (int j = 1; j < dist.length; j++) {
+                if (s.length() - j + dist[i][j] != i)
+                    dist[i][j] = 0;
+            }
         }
-        System.out.printf("i: %d, j: %d, max: %d", i, j, max);
+
+        int maxi = 0, maxj = 0, max = 0;
+        for (int i = 1; i < dist.length; i++) {
+            for (int j = 1; j < dist[0].length; j++) {
+                if (dist[i][j] > max) {
+                    maxi = i;
+                    maxj = j;
+                    max = dist[i][j];
+                }
+            }
+        }
+        System.out.printf("i: %d, j: %d, max: %d\n", maxi, maxj, max);
+        System.out.println(s.substring(maxj - max, maxj));
+
+
         return 0;
     }
     public String longestPalindrome(String s) {
@@ -37,14 +53,14 @@ public class Solution {
         String s1 = "abacdfgdcaba";
         String s2 = "abacdgfdcaba";
         Solution sol = new Solution();
-        sol.construct_dist(s1, s2);
+
+        sol.longestPalindrome_len(s1);
+        System.out.println();
         for (int[] item : sol.dist) {
             for (int itemc : item) {
                 System.out.print(itemc);
             }
             System.out.print('\n');
         }
-
-        sol.longestPalindrome_len(s1);
     }
 }
