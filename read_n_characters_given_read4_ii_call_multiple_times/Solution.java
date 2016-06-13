@@ -12,22 +12,21 @@ public class Solution extends Reader4 {
      * @return    The number of characters read
      */
     public int read(char[] buf, int n) {
-        Character c = read1();
         int offset = 0;
-        while (c != null && n != 0) {
-            buf[curr_loc + offset] = c;
+        while (hasNext() && n != 0) {
+            char c = read1();
+            buf[offset] = c;
             offset++;
             n--;
-            c = read1();
         }
-        curr_loc += offset;
+//        curr_loc += offset;
         return offset;
     }
 
     private char[] read4buff = new char[4];
-    private int buffermax = 0;
+    private int buffermax = 0; //0 ~ 3 read4's return
     private int p = 4; // initial refresh
-    private int curr_loc = 0;
+//    private int curr_loc = 0;
 
     private void refresh() {
         if (p == 4) {
@@ -47,19 +46,29 @@ public class Solution extends Reader4 {
         }
     }
 
-//    private Character peek1(})
+    private boolean hasNext() {
+        refresh();
+        return p != buffermax;
+    }
 
     public static void main(String[] args) {
         Solution sol = new Solution();
-        String input = "a";
+        String input;
+        char[] output;
+
+        input = "ab";
         sol.setContents(input.toCharArray());
-        char[] output = new char[3];
-        System.out.println("Read N: " + sol.read(output, 0));
+
+
+        output = new char[10];
         System.out.println("Read N: " + sol.read(output, 1));
-
-//        System.out.println("Read N: " + sol.read(output, 3));
-
         for (char item : output)
             System.out.print(item);
+        System.out.println();
+        output = new char[10];
+        System.out.println("Read N: " + sol.read(output, 2));
+        for (char item : output)
+            System.out.print(item);
+
     }
 }
