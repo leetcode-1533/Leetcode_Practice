@@ -53,24 +53,5 @@ public class Solution {
         } else
             return false;
     }
-
-    public static void main(String[] args) {
-        String s1;
-        String s2;
-        Solution sol = new Solution();
-
-        s1 = "a";
-        s2 = "ba";
-        System.out.println(s1 + "\n" + s2 + "\n" + sol.isOneEditDistance(s1, s2));
-
-        s1 = "cab";
-        s2 = "ad";
-        System.out.println(s1 + "\n" + s2 + "\n" + sol.isOneEditDistance(s1, s2));
-
-        s1 = "a";
-        s2 = "ac";
-        System.out.println(s1 + "\n" + s2 + "\n" + sol.isOneEditDistance(s1, s2));
-
-    }
 }
 
