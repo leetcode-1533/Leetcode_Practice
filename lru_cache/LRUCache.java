@@ -26,10 +26,14 @@ public class LRUCache {
     }
 
     public void set(int key, int value) {
-        if (map.size() == size) {
-            int keytodel = list.poll().getKey();
-            map.remove(keytodel);
-        }
+        LinkedList.Node oldnode = null;
+        if (map.containsKey(key))
+            oldnode = map.get(key);
+        else if (map.size() == size)
+            oldnode = list.head;
+        if (oldnode != null)
+            list.remove(oldnode);
+
         LinkedList.Node newnode = list.offer(key, value);
         map.put(key, newnode);
     }
@@ -75,10 +79,18 @@ public class LRUCache {
             return tail;
         }
 
-        public Node poll() {
-            Node temp = head;
-            head = head.after;
-            return temp;
+        public void remove(Node node) {
+            if (node == head)
+                head = head.after;
+            else if (node == tail)
+                tail = tail.before;
+
+            Node be = node.before;
+            Node af = node.after;
+            if (be != null)
+                be.after = af;
+            if (af != null)
+                af.before = be;
         }
 
         public void addCount(Node node) {
@@ -103,16 +115,14 @@ public class LRUCache {
     }
 
     public static void main(String[] args) {
-        LRUCache sol = new LRUCache(5);
-        int[] keySet = new int[] {3, 4, 5, 6, 7};
-        for (int item : keySet) {
-            sol.set(item, item);
-        }
-        sol.get(7);
-        sol.get(10);
-        sol.get(5);
-        sol.get(3);
-        sol.set(8, 8);
+        LRUCache sol = new LRUCache(2);
+        System.out.println(sol.get(2));
+        sol.set(2, 6);
+        System.out.println(sol.get(1));
+        sol.set(1, 5);
+        sol.set(1, 2);
+        System.out.println(sol.get(1));
+        System.out.println(sol.get(2));
     }
 
 
