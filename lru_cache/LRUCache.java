@@ -31,8 +31,10 @@ public class LRUCache {
             oldnode = map.get(key);
         else if (map.size() == size)
             oldnode = list.head;
-        if (oldnode != null)
+        if (oldnode != null) {
             list.remove(oldnode);
+            map.remove(oldnode.getKey());
+        }
 
         LinkedList.Node newnode = list.offer(key, value);
         map.put(key, newnode);
@@ -82,7 +84,7 @@ public class LRUCache {
         public void remove(Node node) {
             if (node == head)
                 head = head.after;
-            else if (node == tail)
+            if (node == tail)
                 tail = tail.before;
 
             Node be = node.before;
@@ -115,14 +117,20 @@ public class LRUCache {
     }
 
     public static void main(String[] args) {
-        LRUCache sol = new LRUCache(2);
+//        LRUCache sol = new LRUCache(2);
+//        System.out.println(sol.get(2));
+//        sol.set(2, 6);
+//        System.out.println(sol.get(1));
+//        sol.set(1, 5);
+//        sol.set(1, 2);
+//        System.out.println(sol.get(1));
+//        System.out.println(sol.get(2));
+        LRUCache sol = new LRUCache(1);
+        sol.set(2, 1);
         System.out.println(sol.get(2));
-        sol.set(2, 6);
-        System.out.println(sol.get(1));
-        sol.set(1, 5);
-        sol.set(1, 2);
-        System.out.println(sol.get(1));
+        sol.set(3, 2);
         System.out.println(sol.get(2));
+        System.out.println(sol.get(3));
     }
 
 
