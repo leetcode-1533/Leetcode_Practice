@@ -13,12 +13,19 @@ public class Solution {
         int maxi = 0, max = 0;
         for (int i = 1; i < dist.length; i++) {
             for (int j = 1; j < dist.length; j++) {
+                /*
+                Dynamic Programming Distance matrix
+                 */
                 if (s.charAt(i - 1) == rev_s.charAt(j - 1))
                     dist[i][j] = dist[i - 1][j - 1] + 1;
                 else
                     dist[i][j] = 0;
 
                 if (s.length() - j + dist[i][j] == i && dist[i][j] > max) {
+                    /*
+                    if the beginning of the substring's index is same as
+                    the reversed substring's original end index
+                     */
                     maxi = i;
                     max = dist[i][j];
                 }
@@ -29,7 +36,7 @@ public class Solution {
 
 
     public static void main(String[] args) {
-        String s1 = "abacdfgdcaba";
+        String s1 = "ThesampletextthatcouldbereadedthesameinbothordersArozaupalanalapuazorA";
         Solution sol = new Solution();
 
         System.out.println(sol.longestPalindrome(s1));
