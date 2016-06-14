@@ -4,30 +4,42 @@ package lru_cache;
  * Created by y1275963 on 6/13/16.
  */
 import java.util.HashMap;
-import java.util.PriorityQueue;
-import java.util.AbstractMap.SimpleImmutableEntry;
-import java.util.Map.Entry;
-import java.util.Comparator;
-import java.util.Map;
-import java.util.Queue;
+
 
 public class LRUCache {
-    int size;
-    PriorityQueue<Entry<Integer, Integer>> leastQ;
-    Map<Integer, Integer> map;
+    private int size;
+    private LinkedList list = new LinkedList();
 
-    private class counterComparator implements Comparator<Entry<Integer, Integer>> {
-        @Override
-        public int compare(Entry<Integer, Integer> x, Entry<Integer, Integer> y) {
-            return x.getValue().compareTo(y.getValue());
+    private class LinkedList {
+        public class Node {
+            /*
+            head   <- before Node after ->  tail
+             */
+            private int value;
+            private int count;
+            private Node before;
+            private Node after;
+
+            private Node (int val, Node be, Node af) {
+                value = val;
+                before = be;
+                after = af;
+            }
         }
-    }
 
-    public LRUCache(int capacity) {
-        size = capacity;
-        leastQ = new PriorityQueue<>(capacity, new counterComparator());
-        map = new HashMap<>(capacity);
+        private Node head = null, tail = null;
 
+        private Node offer(int value) {
+            if (head == null && tail == null) {
+                head = new Node(value, null, null);
+                tail = head;
+            } else {
+                Node newnode = new Node(value, tail, null);
+                tail.after = newnode;
+                tail = newnode;
+            }
+            return tail;
+        }
     }
 
     public int get(int key) {
@@ -39,13 +51,10 @@ public class LRUCache {
     }
 
     public static void main(String[] args) {
-        LRUCache sol = new LRUCache(10);
-        sol.leastQ.add(new SimpleImmutableEntry(3, 0));
-        sol.leastQ.add(new SimpleImmutableEntry(4, 20));
-        sol.leastQ.add(new SimpleImmutableEntry(4, 30));
-        System.out.println(sol.leastQ.peek());
-
-
-
+        LRUCache sol = new LRUCache();
+        sol.list.offer(5);
+        sol.list.offer(3);
+        sol.list.offer(5);
+        sol.list.offer(3);
     }
 }
