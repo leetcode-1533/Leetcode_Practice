@@ -17,8 +17,8 @@ public class LRUCache {
 
     public int get(int key) {
         if (map.containsKey(key)) {
-            int re = map.get(key);
-            list.addCount(key);
+            int re = map.get(key).getValue();
+            list.addCount(map.get(key));
             return re;
         } else {
             return -1;
@@ -27,12 +27,24 @@ public class LRUCache {
 
     public void set(int key, int value) {
         if (map.size() == size) {
-
+            int keytodel = list.poll().getKey();
+            map.remove(keytodel);
         }
-
+        LinkedList.Node newnode = list.offer(key, value);
+        map.put(key, newnode);
     }
 
     public static void main(String[] args) {
+        LRUCache sol = new LRUCache(5);
+        int[] keySet = new int[] {3, 4, 5, 6, 7};
+        for (int item : keySet) {
+            sol.set(item, item);
+        }
+        sol.get(7);
+        sol.get(10);
+        sol.get(5);
+        sol.get(3);
+        sol.set(8, 8);
     }
 }
 
@@ -53,6 +65,10 @@ class LinkedList {
             after = af;
         }
 
+        public int getKey() {
+            return key;
+        }
+
         public int getValue() {
             return value;
         }
@@ -60,13 +76,13 @@ class LinkedList {
 
     private Node head = null, tail = null;
 
-    public Node offer(int value) {
+    public Node offer(int key, int value) {
         // Add to the tail
         if (head == null && tail == null) {
-            head = new Node(value, null, null);
+            head = new Node(key, value, null, null);
             tail = head;
         } else {
-            Node newnode = new Node(value, tail, null);
+            Node newnode = new Node(key, value, tail, null);
             tail.after = newnode;
             tail = newnode;
         }
@@ -81,7 +97,17 @@ class LinkedList {
 
     public void addCount(Node node) {
         // move to the tail
-        tail.after = node;
-        tail = node;
+        if (node != tail) {
+            Node be = node.before;
+            Node af = node.after;
+
+            if (be != null) // in case node is the head
+                be.after = af;
+
+            tail.after = node;
+            node.before = tail;
+            tail = node;
+            tail.after = null;
+        }
     }
 }
