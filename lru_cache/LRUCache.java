@@ -98,11 +98,15 @@ class LinkedList {
     public void addCount(Node node) {
         // move to the tail
         if (node != tail) {
+            if (node == head)
+                head = head.after;
+
             Node be = node.before;
             Node af = node.after;
 
             if (be != null) // in case node is the head
                 be.after = af;
+            af.before = be;
 
             tail.after = node;
             node.before = tail;
