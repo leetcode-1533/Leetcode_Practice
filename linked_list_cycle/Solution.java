@@ -19,4 +19,20 @@ public class Solution {
         }
         return false;
     }
+
+    public boolean hasCycle2(ListNode head) {
+        ListNode haar = head;
+        ListNode tortoise = head;
+        while (haar != null) {
+            if (haar.next == null)
+                return false;
+            else {
+                haar = haar.next.next;
+                tortoise = tortoise.next;
+                if (haar == tortoise)
+                    return true;
+            }
+        }
+        return false;
+    }
 }
