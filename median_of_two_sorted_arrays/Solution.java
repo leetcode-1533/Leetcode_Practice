@@ -10,6 +10,13 @@ public class Solution {
         return 0;
     }
 
+    private static double getMedian(int[] nums) {
+        if (nums.length % 2 == 0)
+            return (nums[nums.length / 2] + nums[nums.length / 2 - 1]) / 2.0;
+        else
+            return nums[nums.length / 2];
+    }
+
     public double findMedianSortedArrays_merge(int[] nums1, int[] nums2) {
         i = 0;
         j = 0;
@@ -37,10 +44,11 @@ public class Solution {
 
     public static void main(String[] args) {
         Solution sol = new Solution();
-        int[] test1 = new int[]{1};
-        int[] test2 = new int[]{};
+        int[] test1 = {1, 12, 15, 26};
+        int[] test2 = {2, 13, 17, 30, 45};
+        System.out.println(Solution.getMedian(test1));
 
-        System.out.println(sol.findMedianSortedArrays_merge(test1, test2));
+//        System.out.println(sol.findMedianSortedArrays_merge(test1, test2));
 
 
 //
