@@ -48,7 +48,7 @@ public class Solution {
         }
         if (matrix[med][col] == target)
             return med;
-        else if (matrix[end][col] < target) // maximum value out of bound
+        else if (matrix[end][col] <= target) // maximum value out of bound
             return end;
         else
             return start;
@@ -70,7 +70,7 @@ public class Solution {
         }
         if (matrix[row][med] == target)
             return matrix[row][med];
-        else if (matrix[row][end] < target) // maximum value out of bound
+        else if (matrix[row][end] <= target) // maximum value out of bound
             return matrix[row][end];
         else
             return matrix[row][start];
@@ -83,7 +83,12 @@ public class Solution {
         int[][] matrix_test = new int[][]{{1, 3, 5, 7}, {10, 11, 16 ,20}, {23, 30, 34, 60}};
         System.out.println(Solution.searchMatrix(matrix_test, 12));
         // 1d cases
-//        int[][] matrix_test = new int[][]{{}}
+        matrix_test = new int[][]{{1, 3}};
+        System.out.println(Solution.searchMatrix(matrix_test, 5));
+
+        matrix_test = new int[][]{{1}, {3}};
+        System.out.println(Solution.searchMatrix(matrix_test, 1));
+
 //        int re = sol.binarySearch_byrows(matrix_test, 1, 29, 0, matrix_test.length - 1);
 //        System.out.println(re);
 
