@@ -5,26 +5,26 @@ package valid_anagram;
  * Given two strings s and t, write a function to determine if t is an anagram of s.
  */
 public class Solution {
-    private static boolean contains(String s, String t) {
-        boolean[] alphabet = new boolean[26];
+    public static boolean isAnagram(String s, String t) {
+        int[] alphabet = new int[26];
         for (int i = 0; i < s.length(); i++) {
-            alphabet[s.charAt(i) - 'a'] = true;
+            alphabet[s.charAt(i) - 'a']++;
         }
 
         for (int i = 0; i < t.length(); i++) {
-            if (!alphabet[t.charAt(i) - 'a'])
+            alphabet[t.charAt(i) - 'a']--;
+        }
+
+        for (int item : alphabet) {
+            if (item != 0)
                 return false;
         }
 
         return true;
     }
 
-    public static boolean isAnagram(String s, String t) {
-        return Solution.contains(s, t) && Solution.contains(t, s);
-    }
-
     public static void main(String[] args) {
-        String s = "ab";
+        String s = "aa";
         String t = "a";
         System.out.println(Solution.isAnagram(s, t));
     }
