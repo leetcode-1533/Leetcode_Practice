@@ -11,14 +11,14 @@ public class Solution extends VersionControl {
     private int binarysearch(int start, int end) {
         if (end - 1 > start) {
             int mid = start + (end-start) / 2;
-            if (!super.isBadVersion(mid - 1) && super.isBadVersion(mid)) {
-                return mid;
-            } else if (super.isBadVersion(mid - 1) && super.isBadVersion(mid)) {
+            if (super.isBadVersion(mid)) {
                 return binarysearch(start, mid);
-            } else
+            } else {
                 return binarysearch(mid, end);
+            }
         }
-        if (end - 1 == start && super.isBadVersion(end)) // tail condition
+
+        if (end - 1 == start) // tail condition
             return end;
         else
             return -1;
