@@ -24,19 +24,27 @@ public class Solution {
         int mean = 0;
         while (rp - lp > 1) {
             mean = lp + (rp - lp) / 2;
-            if (target > nums[mean])
-                lp = mean;
-            else
+            if (target <= nums[mean])
                 rp = mean;
+            else
+                lp = mean;
         }
         if (nums[lp] > target)
             return -1;
-        else if (nums[lp] == target)
+        else if (nums[lp] == target) {
+//            System.out.println("Test");
+
             return lp;
-        else if (nums[mean] == target)
+        }
+        else if (nums[mean] == target) {
+//            System.out.println("test 2");
+
             return mean;
-        else
+        }
+        else {
+//            System.out.println("test 3");
             return rp;
+        }
     }
 
     private int highersearch(int[] nums, int target) {
@@ -66,7 +74,7 @@ public class Solution {
 
     public static void main(String[] args) {
         Solution sol = new Solution();
-        int[] nums = {1, 5};
+        int[] nums = {5, 7, 7, 8, 8, 10};
         for (int i = 0; i < nums.length; i++) {
             System.out.printf("%d\t", i);
         }
@@ -76,7 +84,7 @@ public class Solution {
         }
         System.out.println();
 
-        int[] re = sol.searchRange(nums, 4);
+        int[] re = sol.searchRange(nums, 5);
         for (int item : re)
             System.out.println(item);
 //        Set<Integer> test = new HashSet<>();
