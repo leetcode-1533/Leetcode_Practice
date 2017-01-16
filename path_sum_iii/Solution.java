@@ -9,22 +9,21 @@ import java.lang.*;
 
 public class Solution {
     public int pathSum(TreeNode root, int sum) {
-        return dfs(root, 0, sum);
+        if (root == null)
+            return 0;
+
+        return dfs(root, 0, sum) + this.pathSum(root.left, sum) + this.pathSum(root.right, sum);
     }
 
     private int dfs(TreeNode current, int cur_sum, int target) {
-        int re = 0;
         if (current != null) {
-//            System.out.printf("current: %d, sum: %d\n", current.val, cur_sum);
+            int re = 0;
 
             if (cur_sum + current.val == target)
-                return 1;
+                re = 1;
 
-            re += dfs(current.left, current.val + cur_sum, target);
-            re += dfs(current.right, current.val + cur_sum, target);
-
-            re += dfs(current.left, 0, target);
-            re += dfs(current.right, 0, target);
+            re += dfs(current.left, cur_sum + current.val, target);
+            re += dfs(current.right, cur_sum + current.val, target);
 
             return re;
         } else {
@@ -35,11 +34,16 @@ public class Solution {
     public static void main(String[] args) {
         TreeNode root = TreeNode.build(new Integer[] {1,-2,-3,1,3,-2,null,-1});
         Solution sol = new Solution();
-        int re = sol.pathSum(root, 3);
+        int re;
+         re = sol.pathSum(root, 3);
         System.out.println(re);
 
         root = TreeNode.build(new Integer[] {10,5,-3,3,2,null,11,3,-2,null,1});
         re = sol.pathSum(root, 8);
+        System.out.println(re);
+
+        root = TreeNode.build(new Integer[] {5,4,8,11,null,13,4,7,2,null,null,5,1});
+        re = sol.pathSum(root, 22);
         System.out.println(re);
     }
 }
