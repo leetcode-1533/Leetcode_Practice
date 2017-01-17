@@ -12,29 +12,21 @@ class MyStack {
 
     // Push element x onto stack.
     public void push(int x) {
-        q1.add(x);
+        Queue<Integer> temp = new LinkedList<>();
+        temp.add(x);
+        while (!q1.isEmpty())
+            temp.add(q1.poll());
+        q1 = temp;
     }
 
     // Removes the element on top of the stack.
     public void pop() {
-        Queue<Integer> temp = new LinkedList<>();
-        while (q1.size() != 1) {
-            temp.add(q1.poll());
-        }
         q1.poll();
-        q1 = temp;
     }
 
     // Get the top element.
     public int top() {
-        Queue<Integer> temp = new LinkedList<>();
-        while (q1.size() != 1) {
-            temp.add(q1.poll());
-        }
-        int re = q1.poll();
-        temp.add(re);
-        q1 = temp;
-        return re;
+        return q1.peek();
     }
 
     // Return whether the stack is empty.
