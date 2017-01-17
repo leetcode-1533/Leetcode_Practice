@@ -10,22 +10,24 @@ import utility.TreeNode;
 public class Solution {
     public static List<List<Integer>> pathSum(TreeNode root, int sum) {
         ArrayList<List<Integer>> container = new ArrayList<>();
-        dfs(root, sum, new ArrayList<Integer>(), container);
+        dfs(root, sum, new Stack<Integer>(), container);
         return container;
     }
 
-    private static void dfs(TreeNode current, int sum, List<Integer> progress, ArrayList<List<Integer>> container) {
+    private static void dfs(TreeNode current, int sum, Stack<Integer> progress, ArrayList<List<Integer>> container) {
         if (current != null) {
-            progress.add(current.val);
+            progress.push(current.val);
 
             if (current.left == null && current.right == null && sum - current.val == 0) {
-                container.add(progress);
+                container.add(new ArrayList<>(progress));
             } else if (current.left == null && current.right == null) {
                 // do nothing
             } else {
-                dfs(current.left, sum - current.val, new ArrayList<Integer>(progress), container);
-                dfs(current.right, sum - current.val, new ArrayList<Integer>(progress), container);
+                dfs(current.left, sum - current.val, progress, container);
+                dfs(current.right, sum - current.val, progress, container);
             }
+
+            progress.pop();
         }
     }
 
