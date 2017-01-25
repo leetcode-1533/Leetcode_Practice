@@ -8,6 +8,7 @@ import java.util.*;
 
 public class BSTIterator {
     Stack<TreeNode> container;
+
     public BSTIterator(TreeNode root) {
         container = new Stack<>();
         this.bfs(root, container);
@@ -20,24 +21,25 @@ public class BSTIterator {
 
     /** @return the next smallest number */
     public int next() {
-        return container.pop().val;
+        TreeNode current = container.pop();
+        int re = current.val;
+
+        bfs(current.right, container);
+        return re;
     }
 
     private void bfs(TreeNode root, Stack<TreeNode> container) {
         if (root != null) {
-            bfs(root.right, container);
             container.add(root);
             bfs(root.left, container);
         }
     }
 
     public static void main(String[] args) {
-        TreeNode root = TreeNode.build(new Integer[]{8, 3, 10, 1, 6, null, 14, null, null, 4, 7, 13});
-        Stack<TreeNode> container = new Stack<>();
+        TreeNode root = TreeNode.build(new Integer[]{8});
         BSTIterator sol = new BSTIterator(root);
-        sol.bfs(root, container);
-        while (!container.empty()) {
-            System.out.println(container.pop().val);
+        while (sol.hasNext()) {
+            System.out.println(sol.next());
         }
 
     }
